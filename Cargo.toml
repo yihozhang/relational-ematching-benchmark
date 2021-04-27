@@ -1,0 +1,16 @@
+[package]
+name = "egg-bench"
+version = "0.1.0"
+authors = ["Yihong Zhang <yz489@cs.washington.edu>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+ordered-float = "1"
+structopt = { version = "0.3", default-features = false }
+csv = "1.1"
+serde = { version = "1", features = ["derive"] }
+
+[dependencies.egg]
+path = "../egg"

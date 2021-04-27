@@ -1,0 +1,97 @@
+benchmark,node_size,class_size,algo,pattern,time,result_size,repeat_time
+math,99,19,GenericJoin,(* ?a 1),30,15,0
+math,99,19,GenericJoin,(* ?a 1),13,15,1
+math,99,19,EMatch,(* ?a 1),13,15,0
+math,99,19,GenericJoin,(* ?a 0),7,4,0
+math,99,19,GenericJoin,(* ?a 0),5,4,1
+math,99,19,EMatch,(* ?a 0),7,4,0
+math,99,19,GenericJoin,(* ?a ?a),6,2,0
+math,99,19,GenericJoin,(* ?a ?a),5,2,1
+math,99,19,EMatch,(* ?a ?a),5,2,0
+math,99,19,GenericJoin,(* ?a ?b),28,41,0
+math,99,19,GenericJoin,(* ?a ?b),13,41,1
+math,99,19,EMatch,(* ?a ?b),10,41,0
+math,99,19,GenericJoin,(+ ?a ?b),32,51,0
+math,99,19,GenericJoin,(+ ?a ?b),14,51,1
+math,99,19,EMatch,(+ ?a ?b),10,51,0
+math,99,19,GenericJoin,(+ ?a (+ ?b ?c)),68,125,0
+math,99,19,GenericJoin,(+ ?a (+ ?b ?c)),32,125,1
+math,99,19,EMatch,(+ ?a (+ ?b ?c)),20,125,0
+math,99,19,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),46,1,0
+math,99,19,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),23,1,1
+math,99,19,EMatch,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),33,1,0
+math,99,19,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),27,3,0
+math,99,19,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),24,3,1
+math,99,19,EMatch,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),36,3,0
+math,1667,753,GenericJoin,(* ?a 1),418,31,0
+math,1667,753,GenericJoin,(* ?a 1),28,31,1
+math,1667,753,EMatch,(* ?a 1),77,31,0
+math,1667,753,GenericJoin,(* ?a 0),15,31,0
+math,1667,753,GenericJoin,(* ?a 0),12,31,1
+math,1667,753,EMatch,(* ?a 0),60,31,0
+math,1667,753,GenericJoin,(* ?a ?a),10,3,0
+math,1667,753,GenericJoin,(* ?a ?a),6,3,1
+math,1667,753,EMatch,(* ?a ?a),33,3,0
+math,1667,753,GenericJoin,(* ?a ?b),213,853,0
+math,1667,753,GenericJoin,(* ?a ?b),59,853,1
+math,1667,753,EMatch,(* ?a ?b),62,853,0
+math,1667,753,GenericJoin,(+ ?a ?b),627,807,0
+math,1667,753,GenericJoin,(+ ?a ?b),310,807,1
+math,1667,753,EMatch,(+ ?a ?b),190,807,0
+math,1667,753,GenericJoin,(+ ?a (+ ?b ?c)),1116,2236,0
+math,1667,753,GenericJoin,(+ ?a (+ ?b ?c)),401,2236,1
+math,1667,753,EMatch,(+ ?a (+ ?b ?c)),339,2236,0
+math,1667,753,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),372,21,0
+math,1667,753,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),183,21,1
+math,1667,753,EMatch,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),617,21,0
+math,1667,753,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),426,736,0
+math,1667,753,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),356,736,1
+math,1667,753,EMatch,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),51396,736,0
+math,16466,7274,GenericJoin,(* ?a 1),3154,435,0
+math,16466,7274,GenericJoin,(* ?a 1),76,435,1
+math,16466,7274,EMatch,(* ?a 1),682,435,0
+math,16466,7274,GenericJoin,(* ?a 0),26,435,0
+math,16466,7274,GenericJoin,(* ?a 0),26,435,1
+math,16466,7274,EMatch,(* ?a 0),691,435,0
+math,16466,7274,GenericJoin,(* ?a ?a),32,4,0
+math,16466,7274,GenericJoin,(* ?a ?a),7,4,1
+math,16466,7274,EMatch,(* ?a ?a),256,4,0
+math,16466,7274,GenericJoin,(* ?a ?b),1505,8329,0
+math,16466,7274,GenericJoin,(* ?a ?b),386,8329,1
+math,16466,7274,EMatch,(* ?a ?b),390,8329,0
+math,16466,7274,GenericJoin,(+ ?a ?b),5807,8130,0
+math,16466,7274,GenericJoin,(+ ?a ?b),1303,8130,1
+math,16466,7274,EMatch,(+ ?a ?b),1279,8130,0
+math,16466,7274,GenericJoin,(+ ?a (+ ?b ?c)),8971,23345,0
+math,16466,7274,GenericJoin,(+ ?a (+ ?b ?c)),2941,23345,1
+math,16466,7274,EMatch,(+ ?a (+ ?b ?c)),2771,23345,0
+math,16466,7274,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),2521,72,0
+math,16466,7274,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),1225,72,1
+math,16466,7274,EMatch,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),4989,72,0
+math,16466,7274,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),2223,2050,0
+math,16466,7274,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),1889,2050,1
+math,16466,7274,EMatch,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),3971883,2050,0
+math,155125,62772,GenericJoin,(* ?a 1),30398,7138,0
+math,155125,62772,GenericJoin,(* ?a 1),2211,7138,1
+math,155125,62772,EMatch,(* ?a 1),11819,7138,0
+math,155125,62772,GenericJoin,(* ?a 0),339,7135,0
+math,155125,62772,GenericJoin,(* ?a 0),359,7135,1
+math,155125,62772,EMatch,(* ?a 0),9072,7135,0
+math,155125,62772,GenericJoin,(* ?a ?a),298,4,0
+math,155125,62772,GenericJoin,(* ?a ?a),25,4,1
+math,155125,62772,EMatch,(* ?a ?a),2934,4,0
+math,155125,62772,GenericJoin,(* ?a ?b),13884,77695,0
+math,155125,62772,GenericJoin,(* ?a ?b),5915,77695,1
+math,155125,62772,EMatch,(* ?a ?b),5135,77695,0
+math,155125,62772,GenericJoin,(+ ?a ?b),51715,77423,0
+math,155125,62772,GenericJoin,(+ ?a ?b),27919,77423,1
+math,155125,62772,EMatch,(+ ?a ?b),18762,77423,0
+math,155125,62772,GenericJoin,(+ ?a (+ ?b ?c)),87422,230573,0
+math,155125,62772,GenericJoin,(+ ?a (+ ?b ?c)),48563,230573,1
+math,155125,62772,EMatch,(+ ?a (+ ?b ?c)),34902,230573,0
+math,155125,62772,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),32840,147,0
+math,155125,62772,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),15556,147,1
+math,155125,62772,EMatch,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),50134,147,0
+math,155125,62772,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),22135,2669,0
+math,155125,62772,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),21733,2669,1
+math,155125,62772,EMatch,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),TO,0,0
