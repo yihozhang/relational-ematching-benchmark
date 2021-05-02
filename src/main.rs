@@ -150,7 +150,7 @@ fn lambda2(
 
 fn main() {
     let opt = Opt::from_args();
-    let benchs = opt.benchmarks.unwrap_or(vec!["math".into()]);
+    let benchs = opt.benchmarks.unwrap_or(vec!["math".into(), "lambda1".into(), "lambda2".into()]);
     let sizes = opt.sizes.unwrap_or(vec![100, 1000, 10000, 100000, 200000, 300000]);
     let filename = opt.filename.unwrap_or("out/benchmark.csv".into());
     let strategies = opt.strategy.unwrap_or("all".into());

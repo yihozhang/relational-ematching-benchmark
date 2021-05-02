@@ -1,181 +1,721 @@
 benchmark,node_size,class_size,algo,pattern,time,result_size,repeat_time
-math,99,19,GenericJoin,(* ?a 1),28,15,0
-math,99,19,GenericJoin,(* ?a 1),16,15,1
-math,99,19,EMatch,(* ?a 1),23,15,0
-math,99,19,GenericJoin,(* ?a 0),8,4,0
-math,99,19,GenericJoin,(* ?a 0),4,4,1
-math,99,19,EMatch,(* ?a 0),16,4,0
-math,99,19,GenericJoin,(* ?a ?a),4,2,0
-math,99,19,GenericJoin,(* ?a ?a),2,2,1
-math,99,19,EMatch,(* ?a ?a),14,2,0
-math,99,19,GenericJoin,(* ?a ?b),22,41,0
-math,99,19,GenericJoin,(* ?a ?b),8,41,1
-math,99,19,EMatch,(* ?a ?b),17,41,0
-math,99,19,GenericJoin,(+ ?a ?b),23,51,0
-math,99,19,GenericJoin,(+ ?a ?b),8,51,1
-math,99,19,EMatch,(+ ?a ?b),18,51,0
-math,99,19,GenericJoin,(+ ?a (+ ?b ?c)),51,125,0
-math,99,19,GenericJoin,(+ ?a (+ ?b ?c)),21,125,1
-math,99,19,EMatch,(+ ?a (+ ?b ?c)),26,125,0
-math,99,19,GenericJoin,(* (+ ?a ?b) ?c),30,105,0
-math,99,19,GenericJoin,(* (+ ?a ?b) ?c),17,105,1
-math,99,19,EMatch,(* (+ ?a ?b) ?c),22,105,0
-math,99,19,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),33,1,0
-math,99,19,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),16,1,1
-math,99,19,EMatch,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),40,1,0
-math,99,19,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),19,3,0
-math,99,19,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),17,3,1
+math,99,19,GenericJoin,(* ?a 1),23,15,0
+math,99,19,GenericJoin,(* ?a 1),10,15,1
+math,99,19,EMatch,(* ?a 1),10,15,0
+math,99,19,GenericJoin,(* ?a 0),7,4,0
+math,99,19,GenericJoin,(* ?a 0),6,4,1
+math,99,19,EMatch,(* ?a 0),7,4,0
+math,99,19,GenericJoin,(* ?a ?a),7,2,0
+math,99,19,GenericJoin,(* ?a ?a),5,2,1
+math,99,19,EMatch,(* ?a ?a),5,2,0
+math,99,19,GenericJoin,(* ?a ?b),17,41,0
+math,99,19,GenericJoin,(* ?a ?b),10,41,1
+math,99,19,EMatch,(* ?a ?b),10,41,0
+math,99,19,GenericJoin,(+ ?a ?b),17,51,0
+math,99,19,GenericJoin,(+ ?a ?b),11,51,1
+math,99,19,EMatch,(+ ?a ?b),10,51,0
+math,99,19,GenericJoin,(+ ?a (+ ?b ?c)),45,125,0
+math,99,19,GenericJoin,(+ ?a (+ ?b ?c)),26,125,1
+math,99,19,EMatch,(+ ?a (+ ?b ?c)),22,125,0
+math,99,19,GenericJoin,(* (+ ?a ?b) ?c),29,105,0
+math,99,19,GenericJoin,(* (+ ?a ?b) ?c),19,105,1
+math,99,19,EMatch,(* (+ ?a ?b) ?c),19,105,0
+math,99,19,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),85,1,0
+math,99,19,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),28,1,1
+math,99,19,EMatch,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),36,1,0
+math,99,19,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),48,3,0
+math,99,19,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),37,3,1
 math,99,19,EMatch,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),40,3,0
-math,99,19,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),49,54,0
-math,99,19,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),15,54,1
-math,99,19,EMatch,(+ (* ?a ?b) (* ?a ?c)),33,54,0
-math,1647,733,GenericJoin,(* ?a 1),262,31,0
-math,1647,733,GenericJoin,(* ?a 1),9,31,1
-math,1647,733,EMatch,(* ?a 1),98,31,0
-math,1647,733,GenericJoin,(* ?a 0),6,31,0
-math,1647,733,GenericJoin,(* ?a 0),5,31,1
-math,1647,733,EMatch,(* ?a 0),95,31,0
-math,1647,733,GenericJoin,(* ?a ?a),7,3,0
-math,1647,733,GenericJoin,(* ?a ?a),3,3,1
-math,1647,733,EMatch,(* ?a ?a),34,3,0
-math,1647,733,GenericJoin,(* ?a ?b),122,840,0
-math,1647,733,GenericJoin,(* ?a ?b),38,840,1
-math,1647,733,EMatch,(* ?a ?b),52,840,0
-math,1647,733,GenericJoin,(+ ?a ?b),449,800,0
-math,1647,733,GenericJoin,(+ ?a ?b),133,800,1
-math,1647,733,EMatch,(+ ?a ?b),142,800,0
-math,1647,733,GenericJoin,(+ ?a (+ ?b ?c)),761,2424,0
-math,1647,733,GenericJoin,(+ ?a (+ ?b ?c)),228,2424,1
-math,1647,733,EMatch,(+ ?a (+ ?b ?c)),285,2424,0
-math,1647,733,GenericJoin,(* (+ ?a ?b) ?c),231,1028,0
-math,1647,733,GenericJoin,(* (+ ?a ?b) ?c),85,1028,1
-math,1647,733,EMatch,(* (+ ?a ?b) ?c),105,1028,0
-math,1647,733,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),362,45,0
-math,1647,733,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),167,45,1
-math,1647,733,EMatch,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),677,45,0
-math,1647,733,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),317,739,0
-math,1647,733,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),272,739,1
-math,1647,733,EMatch,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),41714,739,0
-math,1647,733,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),21622,538315,0
-math,1647,733,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),20176,538315,1
-math,1647,733,EMatch,(+ (* ?a ?b) (* ?a ?c)),27323,538315,0
-math,15708,6496,GenericJoin,(* ?a 1),2905,453,0
-math,15708,6496,GenericJoin,(* ?a 1),75,453,1
-math,15708,6496,EMatch,(* ?a 1),723,453,0
-math,15708,6496,GenericJoin,(* ?a 0),26,453,0
-math,15708,6496,GenericJoin,(* ?a 0),21,453,1
-math,15708,6496,EMatch,(* ?a 0),598,453,0
-math,15708,6496,GenericJoin,(* ?a ?a),31,4,0
-math,15708,6496,GenericJoin,(* ?a ?a),4,4,1
-math,15708,6496,EMatch,(* ?a ?a),213,4,0
-math,15708,6496,GenericJoin,(* ?a ?b),1161,7889,0
-math,15708,6496,GenericJoin,(* ?a ?b),308,7889,1
-math,15708,6496,EMatch,(* ?a ?b),347,7889,0
-math,15708,6496,GenericJoin,(+ ?a ?b),4614,7812,0
-math,15708,6496,GenericJoin,(+ ?a ?b),1018,7812,1
-math,15708,6496,EMatch,(+ ?a ?b),1008,7812,0
-math,15708,6496,GenericJoin,(+ ?a (+ ?b ?c)),7981,26573,0
-math,15708,6496,GenericJoin,(+ ?a (+ ?b ?c)),2838,26573,1
-math,15708,6496,EMatch,(+ ?a (+ ?b ?c)),2397,26573,0
-math,15708,6496,GenericJoin,(* (+ ?a ?b) ?c),2535,11033,0
-math,15708,6496,GenericJoin,(* (+ ?a ?b) ?c),1296,11033,1
-math,15708,6496,EMatch,(* (+ ?a ?b) ?c),847,11033,0
-math,15708,6496,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),3208,104,0
-math,15708,6496,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),1498,104,1
-math,15708,6496,EMatch,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),6371,104,0
-math,15708,6496,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),2675,1802,0
-math,15708,6496,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),2532,1802,1
-math,15708,6496,EMatch,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),3368365,1802,0
-math,15708,6496,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),372995,10000000,0
-math,15708,6496,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),341900,10000000,1
-math,15708,6496,EMatch,(+ (* ?a ?b) (* ?a ?c)),508757,10000000,0
-math,122017,41895,GenericJoin,(* ?a 1),19395,6363,0
-math,122017,41895,GenericJoin,(* ?a 1),1775,6363,1
-math,122017,41895,EMatch,(* ?a 1),9030,6363,0
-math,122017,41895,GenericJoin,(* ?a 0),201,6363,0
-math,122017,41895,GenericJoin,(* ?a 0),195,6363,1
-math,122017,41895,EMatch,(* ?a 0),7166,6363,0
-math,122017,41895,GenericJoin,(* ?a ?a),196,4,0
-math,122017,41895,GenericJoin,(* ?a ?a),11,4,1
-math,122017,41895,EMatch,(* ?a ?a),2311,4,0
-math,122017,41895,GenericJoin,(* ?a ?b),9460,61069,0
-math,122017,41895,GenericJoin,(* ?a ?b),3535,61069,1
-math,122017,41895,EMatch,(* ?a ?b),3786,61069,0
-math,122017,41895,GenericJoin,(+ ?a ?b),38551,60941,0
-math,122017,41895,GenericJoin,(+ ?a ?b),16259,60941,1
-math,122017,41895,EMatch,(+ ?a ?b),11326,60941,0
-math,122017,41895,GenericJoin,(+ ?a (+ ?b ?c)),73728,216945,0
-math,122017,41895,GenericJoin,(+ ?a (+ ?b ?c)),40045,216945,1
-math,122017,41895,EMatch,(+ ?a (+ ?b ?c)),24606,216945,0
-math,122017,41895,GenericJoin,(* (+ ?a ?b) ?c),32465,105696,0
-math,122017,41895,GenericJoin,(* (+ ?a ?b) ?c),23476,105696,1
-math,122017,41895,EMatch,(* (+ ?a ?b) ?c),10149,105696,0
-math,122017,41895,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),31478,209,0
-math,122017,41895,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),16485,209,1
-math,122017,41895,EMatch,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),49490,209,0
-math,122017,41895,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),25530,2191,0
-math,122017,41895,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),23936,2191,1
-math,122017,41895,EMatch,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),TO,0,0
-math,122017,41895,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),394720,10000000,0
-math,122017,41895,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),369380,10000000,1
-math,122017,41895,EMatch,(+ (* ?a ?b) (* ?a ?c)),TO,0,0
-math,186110,41797,GenericJoin,(* ?a 1),27372,6350,0
-math,186110,41797,GenericJoin,(* ?a 1),1815,6350,1
-math,186110,41797,EMatch,(* ?a 1),12510,6350,0
-math,186110,41797,GenericJoin,(* ?a 0),1903,35249,0
-math,186110,41797,GenericJoin,(* ?a 0),1310,35249,1
-math,186110,41797,EMatch,(* ?a 0),11994,35249,0
-math,186110,41797,GenericJoin,(* ?a ?a),292,4,0
-math,186110,41797,GenericJoin,(* ?a ?a),11,4,1
-math,186110,41797,EMatch,(* ?a ?a),3102,4,0
-math,186110,41797,GenericJoin,(* ?a ?b),22224,89855,0
-math,186110,41797,GenericJoin,(* ?a ?b),9806,89855,1
-math,186110,41797,EMatch,(* ?a ?b),5006,89855,0
-math,186110,41797,GenericJoin,(+ ?a ?b),50621,96248,0
-math,186110,41797,GenericJoin,(+ ?a ?b),20964,96248,1
-math,186110,41797,EMatch,(+ ?a ?b),13730,96248,0
-math,186110,41797,GenericJoin,(+ ?a (+ ?b ?c)),122209,358096,0
-math,186110,41797,GenericJoin,(+ ?a (+ ?b ?c)),67847,358096,1
-math,186110,41797,EMatch,(+ ?a (+ ?b ?c)),37598,358096,0
-math,186110,41797,GenericJoin,(* (+ ?a ?b) ?c),57908,163357,0
-math,186110,41797,GenericJoin,(* (+ ?a ?b) ?c),39140,163357,1
-math,186110,41797,EMatch,(* (+ ?a ?b) ?c),18909,163357,0
-math,186110,41797,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),54261,263,0
-math,186110,41797,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),26066,263,1
-math,186110,41797,EMatch,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),77306,263,0
-math,186110,41797,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),42852,2192,0
-math,186110,41797,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),41101,2192,1
-math,186110,41797,EMatch,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),TO,0,0
-math,186110,41797,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),456227,10000000,0
-math,186110,41797,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),411583,10000000,1
-math,186110,41797,EMatch,(+ (* ?a ?b) (* ?a ?c)),TO,0,0
-math,286110,41797,GenericJoin,(* ?a 1),58433,41797,0
-math,286110,41797,GenericJoin,(* ?a 1),19949,41797,1
-math,286110,41797,EMatch,(* ?a 1),36324,41797,0
-math,286110,41797,GenericJoin,(* ?a 0),1393,40911,0
-math,286110,41797,GenericJoin,(* ?a 0),1383,40911,1
-math,286110,41797,EMatch,(* ?a 0),26589,40911,0
-math,286110,41797,GenericJoin,(* ?a ?a),507,4,0
-math,286110,41797,GenericJoin,(* ?a ?a),21,4,1
-math,286110,41797,EMatch,(* ?a ?a),11774,4,0
-math,286110,41797,GenericJoin,(* ?a ?b),72718,154407,0
-math,286110,41797,GenericJoin,(* ?a ?b),33226,154407,1
-math,286110,41797,EMatch,(* ?a ?b),18801,154407,0
-math,286110,41797,GenericJoin,(+ ?a ?b),58651,131696,0
-math,286110,41797,GenericJoin,(+ ?a ?b),24718,131696,1
-math,286110,41797,EMatch,(+ ?a ?b),17630,131696,0
-math,286110,41797,GenericJoin,(+ ?a (+ ?b ?c)),166991,393547,0
-math,286110,41797,GenericJoin,(+ ?a (+ ?b ?c)),87582,393547,1
-math,286110,41797,EMatch,(+ ?a (+ ?b ?c)),47218,393547,0
-math,286110,41797,GenericJoin,(* (+ ?a ?b) ?c),125662,362467,0
-math,286110,41797,GenericJoin,(* (+ ?a ?b) ?c),83485,362467,1
-math,286110,41797,EMatch,(* (+ ?a ?b) ?c),49396,362467,0
-math,286110,41797,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),71462,263,0
-math,286110,41797,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),32381,263,1
-math,286110,41797,EMatch,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),93450,263,0
-math,286110,41797,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),67706,2192,0
-math,286110,41797,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),65905,2192,1
-math,286110,41797,EMatch,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),TO,0,0
-math,286110,41797,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),548719,10000000,0
-math,286110,41797,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),437954,10000000,1
-math,286110,41797,EMatch,(+ (* ?a ?b) (* ?a ?c)),TO,0,0
+math,99,19,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),72,55,0
+math,99,19,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),28,55,1
+math,99,19,EMatch,(+ (* ?a ?b) (* ?a ?c)),31,55,0
+math,1656,738,GenericJoin,(* ?a 1),176,31,0
+math,1656,738,GenericJoin,(* ?a 1),14,31,1
+math,1656,738,EMatch,(* ?a 1),67,31,0
+math,1656,738,GenericJoin,(* ?a 0),10,31,0
+math,1656,738,GenericJoin,(* ?a 0),9,31,1
+math,1656,738,EMatch,(* ?a 0),62,31,0
+math,1656,738,GenericJoin,(* ?a ?a),10,3,0
+math,1656,738,GenericJoin,(* ?a ?a),6,3,1
+math,1656,738,EMatch,(* ?a ?a),27,3,0
+math,1656,738,GenericJoin,(* ?a ?b),80,844,0
+math,1656,738,GenericJoin,(* ?a ?b),51,844,1
+math,1656,738,EMatch,(* ?a ?b),56,844,0
+math,1656,738,GenericJoin,(+ ?a ?b),158,805,0
+math,1656,738,GenericJoin,(+ ?a ?b),123,805,1
+math,1656,738,EMatch,(+ ?a ?b),156,805,0
+math,1656,738,GenericJoin,(+ ?a (+ ?b ?c)),428,2530,0
+math,1656,738,GenericJoin,(+ ?a (+ ?b ?c)),206,2530,1
+math,1656,738,EMatch,(+ ?a (+ ?b ?c)),417,2530,0
+math,1656,738,GenericJoin,(* (+ ?a ?b) ?c),98,1032,0
+math,1656,738,GenericJoin,(* (+ ?a ?b) ?c),75,1032,1
+math,1656,738,EMatch,(* (+ ?a ?b) ?c),118,1032,0
+math,1656,738,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),1398,24,0
+math,1656,738,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),264,24,1
+math,1656,738,EMatch,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),884,24,0
+math,1656,738,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),611,1014,0
+math,1656,738,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),420,1014,1
+math,1656,738,EMatch,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),52863,1014,0
+math,1656,738,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),29888,545674,0
+math,1656,738,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),28465,545674,1
+math,1656,738,EMatch,(+ (* ?a ?b) (* ?a ?c)),32064,545674,0
+math,15705,6499,GenericJoin,(* ?a 1),928,452,0
+math,15705,6499,GenericJoin,(* ?a 1),73,452,1
+math,15705,6499,EMatch,(* ?a 1),597,452,0
+math,15705,6499,GenericJoin,(* ?a 0),27,452,0
+math,15705,6499,GenericJoin,(* ?a 0),28,452,1
+math,15705,6499,EMatch,(* ?a 0),624,452,0
+math,15705,6499,GenericJoin,(* ?a ?a),31,3,0
+math,15705,6499,GenericJoin,(* ?a ?a),6,3,1
+math,15705,6499,EMatch,(* ?a ?a),244,3,0
+math,15705,6499,GenericJoin,(* ?a ?b),487,7884,0
+math,15705,6499,GenericJoin,(* ?a ?b),403,7884,1
+math,15705,6499,EMatch,(* ?a ?b),467,7884,0
+math,15705,6499,GenericJoin,(+ ?a ?b),1477,7814,0
+math,15705,6499,GenericJoin,(+ ?a ?b),1023,7814,1
+math,15705,6499,EMatch,(+ ?a ?b),1307,7814,0
+math,15705,6499,GenericJoin,(+ ?a (+ ?b ?c)),3555,28994,0
+math,15705,6499,GenericJoin,(+ ?a (+ ?b ?c)),2042,28994,1
+math,15705,6499,EMatch,(+ ?a (+ ?b ?c)),3375,28994,0
+math,15705,6499,GenericJoin,(* (+ ?a ?b) ?c),859,11018,0
+math,15705,6499,GenericJoin,(* (+ ?a ?b) ?c),721,11018,1
+math,15705,6499,EMatch,(* (+ ?a ?b) ?c),1077,11018,0
+math,15705,6499,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),12260,61,0
+math,15705,6499,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),1959,61,1
+math,15705,6499,EMatch,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),6715,61,0
+math,15705,6499,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),29292,204401,0
+math,15705,6499,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),23167,204401,1
+math,15705,6499,EMatch,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),4562920,204401,0
+math,15705,6499,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),526545,10000000,0
+math,15705,6499,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),511483,10000000,1
+math,15705,6499,EMatch,(+ (* ?a ?b) (* ?a ?c)),646952,10000000,0
+math,108080,34517,GenericJoin,(* ?a 1),8041,6498,0
+math,108080,34517,GenericJoin,(* ?a 1),849,6498,1
+math,108080,34517,EMatch,(* ?a 1),5547,6498,0
+math,108080,34517,GenericJoin,(* ?a 0),303,6498,0
+math,108080,34517,GenericJoin,(* ?a 0),270,6498,1
+math,108080,34517,EMatch,(* ?a 0),4650,6498,0
+math,108080,34517,GenericJoin,(* ?a ?a),158,3,0
+math,108080,34517,GenericJoin,(* ?a ?a),14,3,1
+math,108080,34517,EMatch,(* ?a ?a),2072,3,0
+math,108080,34517,GenericJoin,(* ?a ?b),4018,54094,0
+math,108080,34517,GenericJoin,(* ?a ?b),2730,54094,1
+math,108080,34517,EMatch,(* ?a ?b),3998,54094,0
+math,108080,34517,GenericJoin,(+ ?a ?b),10552,53979,0
+math,108080,34517,GenericJoin,(+ ?a ?b),8487,53979,1
+math,108080,34517,EMatch,(+ ?a ?b),10152,53979,0
+math,108080,34517,GenericJoin,(+ ?a (+ ?b ?c)),29895,188617,0
+math,108080,34517,GenericJoin,(+ ?a (+ ?b ?c)),19972,188617,1
+math,108080,34517,EMatch,(+ ?a (+ ?b ?c)),27671,188617,0
+math,108080,34517,GenericJoin,(* (+ ?a ?b) ?c),10133,99665,0
+math,108080,34517,GenericJoin,(* (+ ?a ?b) ?c),9068,99665,1
+math,108080,34517,EMatch,(* (+ ?a ?b) ?c),10340,99665,0
+math,108080,34517,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),82450,88,0
+math,108080,34517,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),23779,88,1
+math,108080,34517,EMatch,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),46770,88,0
+math,108080,34517,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),65338,204450,0
+math,108080,34517,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),56501,204450,1
+math,108080,34517,EMatch,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),TO,0,0
+math,108080,34517,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),582749,10000000,0
+math,108080,34517,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),543113,10000000,1
+math,108080,34517,EMatch,(+ (* ?a ?b) (* ?a ?c)),TO,0,0
+math,180062,34517,GenericJoin,(* ?a 1),8573,6499,0
+math,180062,34517,GenericJoin,(* ?a 1),912,6499,1
+math,180062,34517,EMatch,(* ?a 1),8945,6499,0
+math,180062,34517,GenericJoin,(* ?a 0),2111,34517,0
+math,180062,34517,GenericJoin,(* ?a 0),1613,34517,1
+math,180062,34517,EMatch,(* ?a 0),9679,34517,0
+math,180062,34517,GenericJoin,(* ?a ?a),229,3,0
+math,180062,34517,GenericJoin,(* ?a ?a),13,3,1
+math,180062,34517,EMatch,(* ?a ?a),2842,3,0
+math,180062,34517,GenericJoin,(* ?a ?b),6202,82138,0
+math,180062,34517,GenericJoin,(* ?a ?b),4391,82138,1
+math,180062,34517,EMatch,(* ?a ?b),5981,82138,0
+math,180062,34517,GenericJoin,(+ ?a ?b),14616,97917,0
+math,180062,34517,GenericJoin,(+ ?a ?b),12792,97917,1
+math,180062,34517,EMatch,(+ ?a ?b),14733,97917,0
+math,180062,34517,GenericJoin,(+ ?a (+ ?b ?c)),51152,284758,0
+math,180062,34517,GenericJoin,(+ ?a (+ ?b ?c)),33009,284758,1
+math,180062,34517,EMatch,(+ ?a (+ ?b ?c)),39393,284758,0
+math,180062,34517,GenericJoin,(* (+ ?a ?b) ?c),23094,171718,0
+math,180062,34517,GenericJoin,(* (+ ?a ?b) ?c),19850,171718,1
+math,180062,34517,EMatch,(* (+ ?a ?b) ?c),21548,171718,0
+math,180062,34517,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),142475,88,0
+math,180062,34517,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),39352,88,1
+math,180062,34517,EMatch,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),87233,88,0
+math,180062,34517,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),98928,204451,0
+math,180062,34517,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),75099,204451,1
+math,180062,34517,EMatch,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),TO,0,0
+math,180062,34517,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),635560,10000000,0
+math,180062,34517,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),540197,10000000,1
+math,180062,34517,EMatch,(+ (* ?a ?b) (* ?a ?c)),TO,0,0
+math,274954,34357,GenericJoin,(* ?a 1),17292,34357,0
+math,274954,34357,GenericJoin,(* ?a 1),6879,34357,1
+math,274954,34357,EMatch,(* ?a 1),24276,34357,0
+math,274954,34357,GenericJoin,(* ?a 0),1531,34357,0
+math,274954,34357,GenericJoin,(* ?a 0),1556,34357,1
+math,274954,34357,EMatch,(* ?a 0),16567,34357,0
+math,274954,34357,GenericJoin,(* ?a ?a),455,3,0
+math,274954,34357,GenericJoin,(* ?a ?a),17,3,1
+math,274954,34357,EMatch,(* ?a ?a),10079,3,0
+math,274954,34357,GenericJoin,(* ?a ?b),16738,137539,0
+math,274954,34357,GenericJoin,(* ?a ?b),14721,137539,1
+math,274954,34357,EMatch,(* ?a ?b),17040,137539,0
+math,274954,34357,GenericJoin,(+ ?a ?b),15818,137408,0
+math,274954,34357,GenericJoin,(+ ?a ?b),14362,137408,1
+math,274954,34357,EMatch,(+ ?a ?b),19883,137408,0
+math,274954,34357,GenericJoin,(+ ?a (+ ?b ?c)),73419,407214,0
+math,274954,34357,GenericJoin,(+ ?a (+ ?b ?c)),48505,407214,1
+math,274954,34357,EMatch,(+ ?a (+ ?b ?c)),51598,407214,0
+math,274954,34357,GenericJoin,(* (+ ?a ?b) ?c),45287,378224,0
+math,274954,34357,GenericJoin,(* (+ ?a ?b) ?c),37885,378224,1
+math,274954,34357,EMatch,(* (+ ?a ?b) ?c),53441,378224,0
+math,274954,34357,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),229509,89,0
+math,274954,34357,GenericJoin,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),62628,89,1
+math,274954,34357,EMatch,(+ (+ ?a (+ 1 ?b)) (+ ?a (+ 1 ?c))),95101,89,0
+math,274954,34357,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),164335,202658,0
+math,274954,34357,GenericJoin,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),118510,202658,1
+math,274954,34357,EMatch,(+ (* ?a (+ 1 ?b)) (* ?a (+ 1 ?c))),TO,0,0
+math,274954,34357,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),703972,10000000,0
+math,274954,34357,GenericJoin,(+ (* ?a ?b) (* ?a ?c)),622679,10000000,1
+math,274954,34357,EMatch,(+ (* ?a ?b) (* ?a ?c)),TO,0,0
+lambda1,95,69,GenericJoin,(if true ?then ?else),11,0,0
+lambda1,95,69,GenericJoin,(if true ?then ?else),11,0,1
+lambda1,95,69,EMatch,(if true ?then ?else),2,0,0
+lambda1,95,69,GenericJoin,(if false ?then ?else),8,0,0
+lambda1,95,69,GenericJoin,(if false ?then ?else),9,0,1
+lambda1,95,69,EMatch,(if false ?then ?else),2,0,0
+lambda1,95,69,GenericJoin,(if (= (var ?x) ?e) ?then ?else),21,1,0
+lambda1,95,69,GenericJoin,(if (= (var ?x) ?e) ?then ?else),10,1,1
+lambda1,95,69,EMatch,(if (= (var ?x) ?e) ?then ?else),2,1,0
+lambda1,95,69,GenericJoin,(+ ?a ?b),6,6,0
+lambda1,95,69,GenericJoin,(+ ?a ?b),5,6,1
+lambda1,95,69,EMatch,(+ ?a ?b),2,6,0
+lambda1,95,69,GenericJoin,(+ (+ ?a ?b) ?c),13,0,0
+lambda1,95,69,GenericJoin,(+ (+ ?a ?b) ?c),6,0,1
+lambda1,95,69,EMatch,(+ (+ ?a ?b) ?c),2,0,0
+lambda1,95,69,GenericJoin,(= ?a ?b),5,2,0
+lambda1,95,69,GenericJoin,(= ?a ?b),4,2,1
+lambda1,95,69,EMatch,(= ?a ?b),1,2,0
+lambda1,95,69,GenericJoin,(fix ?v ?e),5,1,0
+lambda1,95,69,GenericJoin,(fix ?v ?e),4,1,1
+lambda1,95,69,EMatch,(fix ?v ?e),1,1,0
+lambda1,95,69,GenericJoin,(app (lam ?v ?body) ?e),16,0,0
+lambda1,95,69,GenericJoin,(app (lam ?v ?body) ?e),6,0,1
+lambda1,95,69,EMatch,(app (lam ?v ?body) ?e),5,0,0
+lambda1,95,69,GenericJoin,(let ?v ?e (app ?a ?b)),32,11,0
+lambda1,95,69,GenericJoin,(let ?v ?e (app ?a ?b)),13,11,1
+lambda1,95,69,EMatch,(let ?v ?e (app ?a ?b)),14,11,0
+lambda1,95,69,GenericJoin,(let ?v ?e (+ ?a ?b)),11,2,0
+lambda1,95,69,GenericJoin,(let ?v ?e (+ ?a ?b)),7,2,1
+lambda1,95,69,EMatch,(let ?v ?e (+ ?a ?b)),10,2,0
+lambda1,95,69,GenericJoin,(let ?v ?e (= ?a ?b)),14,2,0
+lambda1,95,69,GenericJoin,(let ?v ?e (= ?a ?b)),8,2,1
+lambda1,95,69,EMatch,(let ?v ?e (= ?a ?b)),10,2,0
+lambda1,95,69,GenericJoin,(let ?v ?e ?c),23,33,0
+lambda1,95,69,GenericJoin,(let ?v ?e ?c),13,33,1
+lambda1,95,69,EMatch,(let ?v ?e ?c),13,33,0
+lambda1,95,69,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),11,1,0
+lambda1,95,69,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),8,1,1
+lambda1,95,69,EMatch,(let ?v ?e (if ?cond ?then ?else)),9,1,0
+lambda1,95,69,GenericJoin,(let ?v1 ?e (var ?v1)),18,3,0
+lambda1,95,69,GenericJoin,(let ?v1 ?e (var ?v1)),8,3,1
+lambda1,95,69,EMatch,(let ?v1 ?e (var ?v1)),10,3,0
+lambda1,95,69,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),14,0,0
+lambda1,95,69,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),6,0,1
+lambda1,95,69,EMatch,(let ?v1 ?e (lam ?v1 ?body)),9,0,0
+lambda1,599,253,GenericJoin,(if true ?then ?else),13,0,0
+lambda1,599,253,GenericJoin,(if true ?then ?else),7,0,1
+lambda1,599,253,EMatch,(if true ?then ?else),7,0,0
+lambda1,599,253,GenericJoin,(if false ?then ?else),12,5,0
+lambda1,599,253,GenericJoin,(if false ?then ?else),8,5,1
+lambda1,599,253,EMatch,(if false ?then ?else),9,5,0
+lambda1,599,253,GenericJoin,(if (= (var ?x) ?e) ?then ?else),24,11,0
+lambda1,599,253,GenericJoin,(if (= (var ?x) ?e) ?then ?else),13,11,1
+lambda1,599,253,EMatch,(if (= (var ?x) ?e) ?then ?else),17,11,0
+lambda1,599,253,GenericJoin,(+ ?a ?b),15,53,0
+lambda1,599,253,GenericJoin,(+ ?a ?b),11,53,1
+lambda1,599,253,EMatch,(+ ?a ?b),11,53,0
+lambda1,599,253,GenericJoin,(+ (+ ?a ?b) ?c),36,110,0
+lambda1,599,253,GenericJoin,(+ (+ ?a ?b) ?c),24,110,1
+lambda1,599,253,EMatch,(+ (+ ?a ?b) ?c),21,110,0
+lambda1,599,253,GenericJoin,(= ?a ?b),8,12,0
+lambda1,599,253,GenericJoin,(= ?a ?b),6,12,1
+lambda1,599,253,EMatch,(= ?a ?b),3,12,0
+lambda1,599,253,GenericJoin,(fix ?v ?e),5,1,0
+lambda1,599,253,GenericJoin,(fix ?v ?e),5,1,1
+lambda1,599,253,EMatch,(fix ?v ?e),1,1,0
+lambda1,599,253,GenericJoin,(app (lam ?v ?body) ?e),41,39,0
+lambda1,599,253,GenericJoin,(app (lam ?v ?body) ?e),15,39,1
+lambda1,599,253,EMatch,(app (lam ?v ?body) ?e),31,39,0
+lambda1,599,253,GenericJoin,(let ?v ?e (app ?a ?b)),123,148,0
+lambda1,599,253,GenericJoin,(let ?v ?e (app ?a ?b)),48,148,1
+lambda1,599,253,EMatch,(let ?v ?e (app ?a ?b)),96,148,0
+lambda1,599,253,GenericJoin,(let ?v ?e (+ ?a ?b)),42,187,0
+lambda1,599,253,GenericJoin,(let ?v ?e (+ ?a ?b)),46,187,1
+lambda1,599,253,EMatch,(let ?v ?e (+ ?a ?b)),98,187,0
+lambda1,599,253,GenericJoin,(let ?v ?e (= ?a ?b)),26,30,0
+lambda1,599,253,GenericJoin,(let ?v ?e (= ?a ?b)),14,30,1
+lambda1,599,253,EMatch,(let ?v ?e (= ?a ?b)),61,30,0
+lambda1,599,253,GenericJoin,(let ?v ?e ?c),83,342,0
+lambda1,599,253,GenericJoin,(let ?v ?e ?c),51,342,1
+lambda1,599,253,EMatch,(let ?v ?e ?c),75,342,0
+lambda1,599,253,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),32,62,0
+lambda1,599,253,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),28,62,1
+lambda1,599,253,EMatch,(let ?v ?e (if ?cond ?then ?else)),73,62,0
+lambda1,599,253,GenericJoin,(let ?v1 ?e (var ?v1)),55,9,0
+lambda1,599,253,GenericJoin,(let ?v1 ?e (var ?v1)),11,9,1
+lambda1,599,253,EMatch,(let ?v1 ?e (var ?v1)),66,9,0
+lambda1,599,253,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),19,22,0
+lambda1,599,253,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),12,22,1
+lambda1,599,253,EMatch,(let ?v1 ?e (lam ?v1 ?body)),74,22,0
+lambda1,3980,1473,GenericJoin,(if true ?then ?else),61,132,0
+lambda1,3980,1473,GenericJoin,(if true ?then ?else),19,132,1
+lambda1,3980,1473,EMatch,(if true ?then ?else),44,132,0
+lambda1,3980,1473,GenericJoin,(if false ?then ?else),15,16,0
+lambda1,3980,1473,GenericJoin,(if false ?then ?else),11,16,1
+lambda1,3980,1473,EMatch,(if false ?then ?else),36,16,0
+lambda1,3980,1473,GenericJoin,(if (= (var ?x) ?e) ?then ?else),30,6,0
+lambda1,3980,1473,GenericJoin,(if (= (var ?x) ?e) ?then ?else),17,6,1
+lambda1,3980,1473,EMatch,(if (= (var ?x) ?e) ?then ?else),118,6,0
+lambda1,3980,1473,GenericJoin,(+ ?a ?b),60,475,0
+lambda1,3980,1473,GenericJoin,(+ ?a ?b),48,475,1
+lambda1,3980,1473,EMatch,(+ ?a ?b),63,475,0
+lambda1,3980,1473,GenericJoin,(+ (+ ?a ?b) ?c),541,5020,0
+lambda1,3980,1473,GenericJoin,(+ (+ ?a ?b) ?c),339,5020,1
+lambda1,3980,1473,EMatch,(+ (+ ?a ?b) ?c),356,5020,0
+lambda1,3980,1473,GenericJoin,(= ?a ?b),17,47,0
+lambda1,3980,1473,GenericJoin,(= ?a ?b),18,47,1
+lambda1,3980,1473,EMatch,(= ?a ?b),30,47,0
+lambda1,3980,1473,GenericJoin,(fix ?v ?e),8,1,0
+lambda1,3980,1473,GenericJoin,(fix ?v ?e),8,1,1
+lambda1,3980,1473,EMatch,(fix ?v ?e),2,1,0
+lambda1,3980,1473,GenericJoin,(app (lam ?v ?body) ?e),237,1274,0
+lambda1,3980,1473,GenericJoin,(app (lam ?v ?body) ?e),163,1274,1
+lambda1,3980,1473,EMatch,(app (lam ?v ?body) ?e),344,1274,0
+lambda1,3980,1473,GenericJoin,(let ?v ?e (app ?a ?b)),714,2071,0
+lambda1,3980,1473,GenericJoin,(let ?v ?e (app ?a ?b)),476,2071,1
+lambda1,3980,1473,EMatch,(let ?v ?e (app ?a ?b)),1031,2071,0
+lambda1,3980,1473,GenericJoin,(let ?v ?e (+ ?a ?b)),515,3370,0
+lambda1,3980,1473,GenericJoin,(let ?v ?e (+ ?a ?b)),518,3370,1
+lambda1,3980,1473,EMatch,(let ?v ?e (+ ?a ?b)),1084,3370,0
+lambda1,3980,1473,GenericJoin,(let ?v ?e (= ?a ?b)),126,112,0
+lambda1,3980,1473,GenericJoin,(let ?v ?e (= ?a ?b)),46,112,1
+lambda1,3980,1473,EMatch,(let ?v ?e (= ?a ?b)),550,112,0
+lambda1,3980,1473,GenericJoin,(let ?v ?e ?c),347,2093,0
+lambda1,3980,1473,GenericJoin,(let ?v ?e ?c),275,2093,1
+lambda1,3980,1473,EMatch,(let ?v ?e ?c),651,2093,0
+lambda1,3980,1473,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),387,2593,0
+lambda1,3980,1473,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),343,2593,1
+lambda1,3980,1473,EMatch,(let ?v ?e (if ?cond ?then ?else)),918,2593,0
+lambda1,3980,1473,GenericJoin,(let ?v1 ?e (var ?v1)),278,29,0
+lambda1,3980,1473,GenericJoin,(let ?v1 ?e (var ?v1)),18,29,1
+lambda1,3980,1473,EMatch,(let ?v1 ?e (var ?v1)),509,29,0
+lambda1,3980,1473,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),92,109,0
+lambda1,3980,1473,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),30,109,1
+lambda1,3980,1473,EMatch,(let ?v1 ?e (lam ?v1 ?body)),627,109,0
+lambda1,39940,15616,GenericJoin,(if true ?then ?else),219,2015,0
+lambda1,39940,15616,GenericJoin,(if true ?then ?else),130,2015,1
+lambda1,39940,15616,EMatch,(if true ?then ?else),409,2015,0
+lambda1,39940,15616,GenericJoin,(if false ?then ?else),30,30,0
+lambda1,39940,15616,GenericJoin,(if false ?then ?else),25,30,1
+lambda1,39940,15616,EMatch,(if false ?then ?else),336,30,0
+lambda1,39940,15616,GenericJoin,(if (= (var ?x) ?e) ?then ?else),65,35,0
+lambda1,39940,15616,GenericJoin,(if (= (var ?x) ?e) ?then ?else),44,35,1
+lambda1,39940,15616,EMatch,(if (= (var ?x) ?e) ?then ?else),747,35,0
+lambda1,39940,15616,GenericJoin,(+ ?a ?b),388,3769,0
+lambda1,39940,15616,GenericJoin,(+ ?a ?b),348,3769,1
+lambda1,39940,15616,EMatch,(+ ?a ?b),433,3769,0
+lambda1,39940,15616,GenericJoin,(+ (+ ?a ?b) ?c),10411,123027,0
+lambda1,39940,15616,GenericJoin,(+ (+ ?a ?b) ?c),8310,123027,1
+lambda1,39940,15616,EMatch,(+ (+ ?a ?b) ?c),7816,123027,0
+lambda1,39940,15616,GenericJoin,(= ?a ?b),35,76,0
+lambda1,39940,15616,GenericJoin,(= ?a ?b),52,76,1
+lambda1,39940,15616,EMatch,(= ?a ?b),27,76,0
+lambda1,39940,15616,GenericJoin,(fix ?v ?e),12,1,0
+lambda1,39940,15616,GenericJoin,(fix ?v ?e),12,1,1
+lambda1,39940,15616,EMatch,(fix ?v ?e),3,1,0
+lambda1,39940,15616,GenericJoin,(app (lam ?v ?body) ?e),4669,78035,0
+lambda1,39940,15616,GenericJoin,(app (lam ?v ?body) ?e),4171,78035,1
+lambda1,39940,15616,EMatch,(app (lam ?v ?body) ?e),4422,78035,0
+lambda1,39940,15616,GenericJoin,(let ?v ?e (app ?a ?b)),6302,43565,0
+lambda1,39940,15616,GenericJoin,(let ?v ?e (app ?a ?b)),5207,43565,1
+lambda1,39940,15616,EMatch,(let ?v ?e (app ?a ?b)),9189,43565,0
+lambda1,39940,15616,GenericJoin,(let ?v ?e (+ ?a ?b)),8214,69774,0
+lambda1,39940,15616,GenericJoin,(let ?v ?e (+ ?a ?b)),7797,69774,1
+lambda1,39940,15616,EMatch,(let ?v ?e (+ ?a ?b)),12218,69774,0
+lambda1,39940,15616,GenericJoin,(let ?v ?e (= ?a ?b)),156,382,0
+lambda1,39940,15616,GenericJoin,(let ?v ?e (= ?a ?b)),114,382,1
+lambda1,39940,15616,EMatch,(let ?v ?e (= ?a ?b)),3586,382,0
+lambda1,39940,15616,GenericJoin,(let ?v ?e ?c),3938,22522,0
+lambda1,39940,15616,GenericJoin,(let ?v ?e ?c),3520,22522,1
+lambda1,39940,15616,EMatch,(let ?v ?e ?c),5297,22522,0
+lambda1,39940,15616,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),16689,116877,0
+lambda1,39940,15616,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),12222,116877,1
+lambda1,39940,15616,EMatch,(let ?v ?e (if ?cond ?then ?else)),16666,116877,0
+lambda1,39940,15616,GenericJoin,(let ?v1 ?e (var ?v1)),2259,59,0
+lambda1,39940,15616,GenericJoin,(let ?v1 ?e (var ?v1)),37,59,1
+lambda1,39940,15616,EMatch,(let ?v1 ?e (var ?v1)),3396,59,0
+lambda1,39940,15616,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),1089,10037,0
+lambda1,39940,15616,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),794,10037,1
+lambda1,39940,15616,EMatch,(let ?v1 ?e (lam ?v1 ?body)),10634,10037,0
+lambda1,112117,45739,GenericJoin,(if true ?then ?else),181,1792,0
+lambda1,112117,45739,GenericJoin,(if true ?then ?else),121,1792,1
+lambda1,112117,45739,EMatch,(if true ?then ?else),368,1792,0
+lambda1,112117,45739,GenericJoin,(if false ?then ?else),28,34,0
+lambda1,112117,45739,GenericJoin,(if false ?then ?else),28,34,1
+lambda1,112117,45739,EMatch,(if false ?then ?else),327,34,0
+lambda1,112117,45739,GenericJoin,(if (= (var ?x) ?e) ?then ?else),69,31,0
+lambda1,112117,45739,GenericJoin,(if (= (var ?x) ?e) ?then ?else),44,31,1
+lambda1,112117,45739,EMatch,(if (= (var ?x) ?e) ?then ?else),461,31,0
+lambda1,112117,45739,GenericJoin,(+ ?a ?b),3874,34430,0
+lambda1,112117,45739,GenericJoin,(+ ?a ?b),3650,34430,1
+lambda1,112117,45739,EMatch,(+ ?a ?b),6010,34430,0
+lambda1,112117,45739,GenericJoin,(+ (+ ?a ?b) ?c),192315,2125309,0
+lambda1,112117,45739,GenericJoin,(+ (+ ?a ?b) ?c),160999,2125309,1
+lambda1,112117,45739,EMatch,(+ (+ ?a ?b) ?c),131615,2125309,0
+lambda1,112117,45739,GenericJoin,(= ?a ?b),34,35,0
+lambda1,112117,45739,GenericJoin,(= ?a ?b),23,35,1
+lambda1,112117,45739,EMatch,(= ?a ?b),16,35,0
+lambda1,112117,45739,GenericJoin,(fix ?v ?e),16,1,0
+lambda1,112117,45739,GenericJoin,(fix ?v ?e),16,1,1
+lambda1,112117,45739,EMatch,(fix ?v ?e),3,1,0
+lambda1,112117,45739,GenericJoin,(app (lam ?v ?body) ?e),10959,116522,0
+lambda1,112117,45739,GenericJoin,(app (lam ?v ?body) ?e),6332,116522,1
+lambda1,112117,45739,EMatch,(app (lam ?v ?body) ?e),10656,116522,0
+lambda1,112117,45739,GenericJoin,(let ?v ?e (app ?a ?b)),112686,769223,0
+lambda1,112117,45739,GenericJoin,(let ?v ?e (app ?a ?b)),82414,769223,1
+lambda1,112117,45739,EMatch,(let ?v ?e (app ?a ?b)),102259,769223,0
+lambda1,112117,45739,GenericJoin,(let ?v ?e (+ ?a ?b)),42272,406766,0
+lambda1,112117,45739,GenericJoin,(let ?v ?e (+ ?a ?b)),40540,406766,1
+lambda1,112117,45739,EMatch,(let ?v ?e (+ ?a ?b)),54832,406766,0
+lambda1,112117,45739,GenericJoin,(let ?v ?e (= ?a ?b)),108,382,0
+lambda1,112117,45739,GenericJoin,(let ?v ?e (= ?a ?b)),102,382,1
+lambda1,112117,45739,EMatch,(let ?v ?e (= ?a ?b)),10680,382,0
+lambda1,112117,45739,GenericJoin,(let ?v ?e ?c),11761,43048,0
+lambda1,112117,45739,GenericJoin,(let ?v ?e ?c),9773,43048,1
+lambda1,112117,45739,EMatch,(let ?v ?e ?c),15542,43048,0
+lambda1,112117,45739,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),9878,87200,0
+lambda1,112117,45739,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),8964,87200,1
+lambda1,112117,45739,EMatch,(let ?v ?e (if ?cond ?then ?else)),19468,87200,0
+lambda1,112117,45739,GenericJoin,(let ?v1 ?e (var ?v1)),4570,60,0
+lambda1,112117,45739,GenericJoin,(let ?v1 ?e (var ?v1)),49,60,1
+lambda1,112117,45739,EMatch,(let ?v1 ?e (var ?v1)),10170,60,0
+lambda1,112117,45739,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),5672,97868,0
+lambda1,112117,45739,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),5468,97868,1
+lambda1,112117,45739,EMatch,(let ?v1 ?e (lam ?v1 ?body)),25316,97868,0
+lambda1,193167,40331,GenericJoin,(if true ?then ?else),191,1792,0
+lambda1,193167,40331,GenericJoin,(if true ?then ?else),117,1792,1
+lambda1,193167,40331,EMatch,(if true ?then ?else),377,1792,0
+lambda1,193167,40331,GenericJoin,(if false ?then ?else),38,35,0
+lambda1,193167,40331,GenericJoin,(if false ?then ?else),28,35,1
+lambda1,193167,40331,EMatch,(if false ?then ?else),328,35,0
+lambda1,193167,40331,GenericJoin,(if (= (var ?x) ?e) ?then ?else),50,31,0
+lambda1,193167,40331,GenericJoin,(if (= (var ?x) ?e) ?then ?else),42,31,1
+lambda1,193167,40331,EMatch,(if (= (var ?x) ?e) ?then ?else),697,31,0
+lambda1,193167,40331,GenericJoin,(+ ?a ?b),3322,42488,0
+lambda1,193167,40331,GenericJoin,(+ ?a ?b),3010,42488,1
+lambda1,193167,40331,EMatch,(+ ?a ?b),4485,42488,0
+lambda1,193167,40331,GenericJoin,(+ (+ ?a ?b) ?c),223132,2692234,0
+lambda1,193167,40331,GenericJoin,(+ (+ ?a ?b) ?c),203504,2692234,1
+lambda1,193167,40331,EMatch,(+ (+ ?a ?b) ?c),166591,2692234,0
+lambda1,193167,40331,GenericJoin,(= ?a ?b),25,35,0
+lambda1,193167,40331,GenericJoin,(= ?a ?b),20,35,1
+lambda1,193167,40331,EMatch,(= ?a ?b),18,35,0
+lambda1,193167,40331,GenericJoin,(fix ?v ?e),14,1,0
+lambda1,193167,40331,GenericJoin,(fix ?v ?e),13,1,1
+lambda1,193167,40331,EMatch,(fix ?v ?e),6,1,0
+lambda1,193167,40331,GenericJoin,(app (lam ?v ?body) ?e),9159,116522,0
+lambda1,193167,40331,GenericJoin,(app (lam ?v ?body) ?e),6161,116522,1
+lambda1,193167,40331,EMatch,(app (lam ?v ?body) ?e),11110,116522,0
+lambda1,193167,40331,GenericJoin,(let ?v ?e (app ?a ?b)),115586,769831,0
+lambda1,193167,40331,GenericJoin,(let ?v ?e (app ?a ?b)),84510,769831,1
+lambda1,193167,40331,EMatch,(let ?v ?e (app ?a ?b)),107791,769831,0
+lambda1,193167,40331,GenericJoin,(let ?v ?e (+ ?a ?b)),50238,500885,0
+lambda1,193167,40331,GenericJoin,(let ?v ?e (+ ?a ?b)),51565,500885,1
+lambda1,193167,40331,EMatch,(let ?v ?e (+ ?a ?b)),72286,500885,0
+lambda1,193167,40331,GenericJoin,(let ?v ?e (= ?a ?b)),129,382,0
+lambda1,193167,40331,GenericJoin,(let ?v ?e (= ?a ?b)),115,382,1
+lambda1,193167,40331,EMatch,(let ?v ?e (= ?a ?b)),16802,382,0
+lambda1,193167,40331,GenericJoin,(let ?v ?e ?c),19455,116039,0
+lambda1,193167,40331,GenericJoin,(let ?v ?e ?c),15398,116039,1
+lambda1,193167,40331,EMatch,(let ?v ?e ?c),20655,116039,0
+lambda1,193167,40331,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),9222,87305,0
+lambda1,193167,40331,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),9182,87305,1
+lambda1,193167,40331,EMatch,(let ?v ?e (if ?cond ?then ?else)),27890,87305,0
+lambda1,193167,40331,GenericJoin,(let ?v1 ?e (var ?v1)),9735,60,0
+lambda1,193167,40331,GenericJoin,(let ?v1 ?e (var ?v1)),53,60,1
+lambda1,193167,40331,EMatch,(let ?v1 ?e (var ?v1)),17890,60,0
+lambda1,193167,40331,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),5783,97868,0
+lambda1,193167,40331,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),5314,97868,1
+lambda1,193167,40331,EMatch,(let ?v1 ?e (lam ?v1 ?body)),30116,97868,0
+lambda2,92,50,GenericJoin,(if true ?then ?else),11,0,0
+lambda2,92,50,GenericJoin,(if true ?then ?else),7,0,1
+lambda2,92,50,EMatch,(if true ?then ?else),4,0,0
+lambda2,92,50,GenericJoin,(if false ?then ?else),11,1,0
+lambda2,92,50,GenericJoin,(if false ?then ?else),8,1,1
+lambda2,92,50,EMatch,(if false ?then ?else),3,1,0
+lambda2,92,50,GenericJoin,(if (= (var ?x) ?e) ?then ?else),17,2,0
+lambda2,92,50,GenericJoin,(if (= (var ?x) ?e) ?then ?else),11,2,1
+lambda2,92,50,EMatch,(if (= (var ?x) ?e) ?then ?else),5,2,0
+lambda2,92,50,GenericJoin,(+ ?a ?b),9,17,0
+lambda2,92,50,GenericJoin,(+ ?a ?b),7,17,1
+lambda2,92,50,EMatch,(+ ?a ?b),5,17,0
+lambda2,92,50,GenericJoin,(+ (+ ?a ?b) ?c),14,0,0
+lambda2,92,50,GenericJoin,(+ (+ ?a ?b) ?c),6,0,1
+lambda2,92,50,EMatch,(+ (+ ?a ?b) ?c),4,0,0
+lambda2,92,50,GenericJoin,(= ?a ?b),6,8,0
+lambda2,92,50,GenericJoin,(= ?a ?b),5,8,1
+lambda2,92,50,EMatch,(= ?a ?b),3,8,0
+lambda2,92,50,GenericJoin,(fix ?v ?e),5,1,0
+lambda2,92,50,GenericJoin,(fix ?v ?e),5,1,1
+lambda2,92,50,EMatch,(fix ?v ?e),1,1,0
+lambda2,92,50,GenericJoin,(app (lam ?v ?body) ?e),9,1,0
+lambda2,92,50,GenericJoin,(app (lam ?v ?body) ?e),7,1,1
+lambda2,92,50,EMatch,(app (lam ?v ?body) ?e),3,1,0
+lambda2,92,50,GenericJoin,(let ?v ?e (app ?a ?b)),18,7,0
+lambda2,92,50,GenericJoin,(let ?v ?e (app ?a ?b)),10,7,1
+lambda2,92,50,EMatch,(let ?v ?e (app ?a ?b)),12,7,0
+lambda2,92,50,GenericJoin,(let ?v ?e (+ ?a ?b)),10,14,0
+lambda2,92,50,GenericJoin,(let ?v ?e (+ ?a ?b)),9,14,1
+lambda2,92,50,EMatch,(let ?v ?e (+ ?a ?b)),13,14,0
+lambda2,92,50,GenericJoin,(let ?v ?e (= ?a ?b)),12,8,0
+lambda2,92,50,GenericJoin,(let ?v ?e (= ?a ?b)),8,8,1
+lambda2,92,50,EMatch,(let ?v ?e (= ?a ?b)),11,8,0
+lambda2,92,50,GenericJoin,(let ?v ?e ?c),17,40,0
+lambda2,92,50,GenericJoin,(let ?v ?e ?c),14,40,1
+lambda2,92,50,EMatch,(let ?v ?e ?c),15,40,0
+lambda2,92,50,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),13,5,0
+lambda2,92,50,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),9,5,1
+lambda2,92,50,EMatch,(let ?v ?e (if ?cond ?then ?else)),12,5,0
+lambda2,92,50,GenericJoin,(let ?v1 ?e (var ?v1)),15,3,0
+lambda2,92,50,GenericJoin,(let ?v1 ?e (var ?v1)),7,3,1
+lambda2,92,50,EMatch,(let ?v1 ?e (var ?v1)),18,3,0
+lambda2,92,50,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),8,0,0
+lambda2,92,50,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),6,0,1
+lambda2,92,50,EMatch,(let ?v1 ?e (lam ?v1 ?body)),8,0,0
+lambda2,370,106,GenericJoin,(if true ?then ?else),14,0,0
+lambda2,370,106,GenericJoin,(if true ?then ?else),7,0,1
+lambda2,370,106,EMatch,(if true ?then ?else),6,0,0
+lambda2,370,106,GenericJoin,(if false ?then ?else),9,4,0
+lambda2,370,106,GenericJoin,(if false ?then ?else),7,4,1
+lambda2,370,106,EMatch,(if false ?then ?else),6,4,0
+lambda2,370,106,GenericJoin,(if (= (var ?x) ?e) ?then ?else),16,4,0
+lambda2,370,106,GenericJoin,(if (= (var ?x) ?e) ?then ?else),11,4,1
+lambda2,370,106,EMatch,(if (= (var ?x) ?e) ?then ?else),12,4,0
+lambda2,370,106,GenericJoin,(+ ?a ?b),28,184,0
+lambda2,370,106,GenericJoin,(+ ?a ?b),23,184,1
+lambda2,370,106,EMatch,(+ ?a ?b),25,184,0
+lambda2,370,106,GenericJoin,(+ (+ ?a ?b) ?c),159,1640,0
+lambda2,370,106,GenericJoin,(+ (+ ?a ?b) ?c),120,1640,1
+lambda2,370,106,EMatch,(+ (+ ?a ?b) ?c),128,1640,0
+lambda2,370,106,GenericJoin,(= ?a ?b),9,14,0
+lambda2,370,106,GenericJoin,(= ?a ?b),7,14,1
+lambda2,370,106,EMatch,(= ?a ?b),4,14,0
+lambda2,370,106,GenericJoin,(fix ?v ?e),7,1,0
+lambda2,370,106,GenericJoin,(fix ?v ?e),6,1,1
+lambda2,370,106,EMatch,(fix ?v ?e),1,1,0
+lambda2,370,106,GenericJoin,(app (lam ?v ?body) ?e),14,5,0
+lambda2,370,106,GenericJoin,(app (lam ?v ?body) ?e),9,5,1
+lambda2,370,106,EMatch,(app (lam ?v ?body) ?e),7,5,0
+lambda2,370,106,GenericJoin,(let ?v ?e (app ?a ?b)),30,13,0
+lambda2,370,106,GenericJoin,(let ?v ?e (app ?a ?b)),12,13,1
+lambda2,370,106,EMatch,(let ?v ?e (app ?a ?b)),29,13,0
+lambda2,370,106,GenericJoin,(let ?v ?e (+ ?a ?b)),109,728,0
+lambda2,370,106,GenericJoin,(let ?v ?e (+ ?a ?b)),117,728,1
+lambda2,370,106,EMatch,(let ?v ?e (+ ?a ?b)),134,728,0
+lambda2,370,106,GenericJoin,(let ?v ?e (= ?a ?b)),29,26,0
+lambda2,370,106,GenericJoin,(let ?v ?e (= ?a ?b)),12,26,1
+lambda2,370,106,EMatch,(let ?v ?e (= ?a ?b)),30,26,0
+lambda2,370,106,GenericJoin,(let ?v ?e ?c),28,125,0
+lambda2,370,106,GenericJoin,(let ?v ?e ?c),24,125,1
+lambda2,370,106,EMatch,(let ?v ?e ?c),31,125,0
+lambda2,370,106,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),20,20,0
+lambda2,370,106,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),14,20,1
+lambda2,370,106,EMatch,(let ?v ?e (if ?cond ?then ?else)),31,20,0
+lambda2,370,106,GenericJoin,(let ?v1 ?e (var ?v1)),31,6,0
+lambda2,370,106,GenericJoin,(let ?v1 ?e (var ?v1)),8,6,1
+lambda2,370,106,EMatch,(let ?v1 ?e (var ?v1)),27,6,0
+lambda2,370,106,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),9,2,0
+lambda2,370,106,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),7,2,1
+lambda2,370,106,EMatch,(let ?v1 ?e (lam ?v1 ?body)),25,2,0
+lambda2,2844,664,GenericJoin,(if true ?then ?else),29,104,0
+lambda2,2844,664,GenericJoin,(if true ?then ?else),17,104,1
+lambda2,2844,664,EMatch,(if true ?then ?else),30,104,0
+lambda2,2844,664,GenericJoin,(if false ?then ?else),17,29,0
+lambda2,2844,664,GenericJoin,(if false ?then ?else),16,29,1
+lambda2,2844,664,EMatch,(if false ?then ?else),29,29,0
+lambda2,2844,664,GenericJoin,(if (= (var ?x) ?e) ?then ?else),29,5,0
+lambda2,2844,664,GenericJoin,(if (= (var ?x) ?e) ?then ?else),17,5,1
+lambda2,2844,664,EMatch,(if (= (var ?x) ?e) ?then ?else),122,5,0
+lambda2,2844,664,GenericJoin,(+ ?a ?b),102,1098,0
+lambda2,2844,664,GenericJoin,(+ ?a ?b),90,1098,1
+lambda2,2844,664,EMatch,(+ ?a ?b),105,1098,0
+lambda2,2844,664,GenericJoin,(+ (+ ?a ?b) ?c),1102,15074,0
+lambda2,2844,664,GenericJoin,(+ (+ ?a ?b) ?c),880,15074,1
+lambda2,2844,664,EMatch,(+ (+ ?a ?b) ?c),989,15074,0
+lambda2,2844,664,GenericJoin,(= ?a ?b),17,67,0
+lambda2,2844,664,GenericJoin,(= ?a ?b),27,67,1
+lambda2,2844,664,EMatch,(= ?a ?b),13,67,0
+lambda2,2844,664,GenericJoin,(fix ?v ?e),6,1,0
+lambda2,2844,664,GenericJoin,(fix ?v ?e),5,1,1
+lambda2,2844,664,EMatch,(fix ?v ?e),2,1,0
+lambda2,2844,664,GenericJoin,(app (lam ?v ?body) ?e),62,36,0
+lambda2,2844,664,GenericJoin,(app (lam ?v ?body) ?e),16,36,1
+lambda2,2844,664,EMatch,(app (lam ?v ?body) ?e),43,36,0
+lambda2,2844,664,GenericJoin,(let ?v ?e (app ?a ?b)),778,7011,0
+lambda2,2844,664,GenericJoin,(let ?v ?e (app ?a ?b)),693,7011,1
+lambda2,2844,664,EMatch,(let ?v ?e (app ?a ?b)),809,7011,0
+lambda2,2844,664,GenericJoin,(let ?v ?e (+ ?a ?b)),658,5778,0
+lambda2,2844,664,GenericJoin,(let ?v ?e (+ ?a ?b)),670,5778,1
+lambda2,2844,664,EMatch,(let ?v ?e (+ ?a ?b)),784,5778,0
+lambda2,2844,664,GenericJoin,(let ?v ?e (= ?a ?b)),72,382,0
+lambda2,2844,664,GenericJoin,(let ?v ?e (= ?a ?b)),59,382,1
+lambda2,2844,664,EMatch,(let ?v ?e (= ?a ?b)),218,382,0
+lambda2,2844,664,GenericJoin,(let ?v ?e ?c),151,1139,0
+lambda2,2844,664,GenericJoin,(let ?v ?e ?c),130,1139,1
+lambda2,2844,664,EMatch,(let ?v ?e ?c),196,1139,0
+lambda2,2844,664,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),333,2795,0
+lambda2,2844,664,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),318,2795,1
+lambda2,2844,664,EMatch,(let ?v ?e (if ?cond ?then ?else)),532,2795,0
+lambda2,2844,664,GenericJoin,(let ?v1 ?e (var ?v1)),98,24,0
+lambda2,2844,664,GenericJoin,(let ?v1 ?e (var ?v1)),15,24,1
+lambda2,2844,664,EMatch,(let ?v1 ?e (var ?v1)),180,24,0
+lambda2,2844,664,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),38,276,0
+lambda2,2844,664,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),34,276,1
+lambda2,2844,664,EMatch,(let ?v1 ?e (lam ?v1 ?body)),201,276,0
+lambda2,17906,5930,GenericJoin,(if true ?then ?else),294,3231,0
+lambda2,17906,5930,GenericJoin,(if true ?then ?else),166,3231,1
+lambda2,17906,5930,EMatch,(if true ?then ?else),633,3231,0
+lambda2,17906,5930,GenericJoin,(if false ?then ?else),54,226,0
+lambda2,17906,5930,GenericJoin,(if false ?then ?else),76,226,1
+lambda2,17906,5930,EMatch,(if false ?then ?else),497,226,0
+lambda2,17906,5930,GenericJoin,(if (= (var ?x) ?e) ?then ?else),61,9,0
+lambda2,17906,5930,GenericJoin,(if (= (var ?x) ?e) ?then ?else),25,9,1
+lambda2,17906,5930,EMatch,(if (= (var ?x) ?e) ?then ?else),1401,9,0
+lambda2,17906,5930,GenericJoin,(+ ?a ?b),185,1860,0
+lambda2,17906,5930,GenericJoin,(+ ?a ?b),150,1860,1
+lambda2,17906,5930,EMatch,(+ ?a ?b),149,1860,0
+lambda2,17906,5930,GenericJoin,(+ (+ ?a ?b) ?c),3761,62795,0
+lambda2,17906,5930,GenericJoin,(+ (+ ?a ?b) ?c),3258,62795,1
+lambda2,17906,5930,EMatch,(+ (+ ?a ?b) ?c),3458,62795,0
+lambda2,17906,5930,GenericJoin,(= ?a ?b),30,120,0
+lambda2,17906,5930,GenericJoin,(= ?a ?b),27,120,1
+lambda2,17906,5930,EMatch,(= ?a ?b),28,120,0
+lambda2,17906,5930,GenericJoin,(fix ?v ?e),9,1,0
+lambda2,17906,5930,GenericJoin,(fix ?v ?e),8,1,1
+lambda2,17906,5930,EMatch,(fix ?v ?e),2,1,0
+lambda2,17906,5930,GenericJoin,(app (lam ?v ?body) ?e),402,251,0
+lambda2,17906,5930,GenericJoin,(app (lam ?v ?body) ?e),48,251,1
+lambda2,17906,5930,EMatch,(app (lam ?v ?body) ?e),268,251,0
+lambda2,17906,5930,GenericJoin,(let ?v ?e (app ?a ?b)),9297,94641,0
+lambda2,17906,5930,GenericJoin,(let ?v ?e (app ?a ?b)),8611,94641,1
+lambda2,17906,5930,EMatch,(let ?v ?e (app ?a ?b)),10646,94641,0
+lambda2,17906,5930,GenericJoin,(let ?v ?e (+ ?a ?b)),2711,26473,0
+lambda2,17906,5930,GenericJoin,(let ?v ?e (+ ?a ?b)),2731,26473,1
+lambda2,17906,5930,EMatch,(let ?v ?e (+ ?a ?b)),4553,26473,0
+lambda2,17906,5930,GenericJoin,(let ?v ?e (= ?a ?b)),134,804,0
+lambda2,17906,5930,GenericJoin,(let ?v ?e (= ?a ?b)),126,804,1
+lambda2,17906,5930,EMatch,(let ?v ?e (= ?a ?b)),1732,804,0
+lambda2,17906,5930,GenericJoin,(let ?v ?e ?c),1374,10024,0
+lambda2,17906,5930,GenericJoin,(let ?v ?e ?c),1063,10024,1
+lambda2,17906,5930,EMatch,(let ?v ?e ?c),1766,10024,0
+lambda2,17906,5930,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),17619,150429,0
+lambda2,17906,5930,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),15686,150429,1
+lambda2,17906,5930,EMatch,(let ?v ?e (if ?cond ?then ?else)),19472,150429,0
+lambda2,17906,5930,GenericJoin,(let ?v1 ?e (var ?v1)),618,46,0
+lambda2,17906,5930,GenericJoin,(let ?v1 ?e (var ?v1)),26,46,1
+lambda2,17906,5930,EMatch,(let ?v1 ?e (var ?v1)),1697,46,0
+lambda2,17906,5930,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),315,3195,0
+lambda2,17906,5930,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),278,3195,1
+lambda2,17906,5930,EMatch,(let ?v1 ?e (lam ?v1 ?body)),1873,3195,0
+lambda2,8186,1272,GenericJoin,(if true ?then ?else),59,280,0
+lambda2,8186,1272,GenericJoin,(if true ?then ?else),35,280,1
+lambda2,8186,1272,EMatch,(if true ?then ?else),78,280,0
+lambda2,8186,1272,GenericJoin,(if false ?then ?else),29,49,0
+lambda2,8186,1272,GenericJoin,(if false ?then ?else),27,49,1
+lambda2,8186,1272,EMatch,(if false ?then ?else),68,49,0
+lambda2,8186,1272,GenericJoin,(if (= (var ?x) ?e) ?then ?else),41,9,0
+lambda2,8186,1272,GenericJoin,(if (= (var ?x) ?e) ?then ?else),30,9,1
+lambda2,8186,1272,EMatch,(if (= (var ?x) ?e) ?then ?else),207,9,0
+lambda2,8186,1272,GenericJoin,(+ ?a ?b),211,1934,0
+lambda2,8186,1272,GenericJoin,(+ ?a ?b),171,1934,1
+lambda2,8186,1272,EMatch,(+ ?a ?b),188,1934,0
+lambda2,8186,1272,GenericJoin,(+ (+ ?a ?b) ?c),3454,54482,0
+lambda2,8186,1272,GenericJoin,(+ (+ ?a ?b) ?c),2942,54482,1
+lambda2,8186,1272,EMatch,(+ (+ ?a ?b) ?c),3168,54482,0
+lambda2,8186,1272,GenericJoin,(= ?a ?b),27,68,0
+lambda2,8186,1272,GenericJoin,(= ?a ?b),42,68,1
+lambda2,8186,1272,EMatch,(= ?a ?b),20,68,0
+lambda2,8186,1272,GenericJoin,(fix ?v ?e),11,1,0
+lambda2,8186,1272,GenericJoin,(fix ?v ?e),12,1,1
+lambda2,8186,1272,EMatch,(fix ?v ?e),3,1,0
+lambda2,8186,1272,GenericJoin,(app (lam ?v ?body) ?e),165,448,0
+lambda2,8186,1272,GenericJoin,(app (lam ?v ?body) ?e),72,448,1
+lambda2,8186,1272,EMatch,(app (lam ?v ?body) ?e),129,448,0
+lambda2,8186,1272,GenericJoin,(let ?v ?e (app ?a ?b)),1641,12427,0
+lambda2,8186,1272,GenericJoin,(let ?v ?e (app ?a ?b)),1248,12427,1
+lambda2,8186,1272,EMatch,(let ?v ?e (app ?a ?b)),2018,12427,0
+lambda2,8186,1272,GenericJoin,(let ?v ?e (+ ?a ?b)),3566,32650,0
+lambda2,8186,1272,GenericJoin,(let ?v ?e (+ ?a ?b)),3405,32650,1
+lambda2,8186,1272,EMatch,(let ?v ?e (+ ?a ?b)),4194,32650,0
+lambda2,8186,1272,GenericJoin,(let ?v ?e (= ?a ?b)),126,816,0
+lambda2,8186,1272,GenericJoin,(let ?v ?e (= ?a ?b)),141,816,1
+lambda2,8186,1272,EMatch,(let ?v ?e (= ?a ?b)),717,816,0
+lambda2,8186,1272,GenericJoin,(let ?v ?e ?c),669,5029,0
+lambda2,8186,1272,GenericJoin,(let ?v ?e ?c),482,5029,1
+lambda2,8186,1272,EMatch,(let ?v ?e ?c),762,5029,0
+lambda2,8186,1272,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),829,6658,0
+lambda2,8186,1272,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),782,6658,1
+lambda2,8186,1272,EMatch,(let ?v ?e (if ?cond ?then ?else)),1499,6658,0
+lambda2,8186,1272,GenericJoin,(let ?v1 ?e (var ?v1)),409,20,0
+lambda2,8186,1272,GenericJoin,(let ?v1 ?e (var ?v1)),26,20,1
+lambda2,8186,1272,EMatch,(let ?v1 ?e (var ?v1)),577,20,0
+lambda2,8186,1272,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),300,2166,0
+lambda2,8186,1272,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),288,2166,1
+lambda2,8186,1272,EMatch,(let ?v1 ?e (lam ?v1 ?body)),885,2166,0
+lambda2,24901,7850,GenericJoin,(if true ?then ?else),483,5549,0
+lambda2,24901,7850,GenericJoin,(if true ?then ?else),425,5549,1
+lambda2,24901,7850,EMatch,(if true ?then ?else),1069,5549,0
+lambda2,24901,7850,GenericJoin,(if false ?then ?else),96,319,0
+lambda2,24901,7850,GenericJoin,(if false ?then ?else),101,319,1
+lambda2,24901,7850,EMatch,(if false ?then ?else),873,319,0
+lambda2,24901,7850,GenericJoin,(if (= (var ?x) ?e) ?then ?else),49,11,0
+lambda2,24901,7850,GenericJoin,(if (= (var ?x) ?e) ?then ?else),34,11,1
+lambda2,24901,7850,EMatch,(if (= (var ?x) ?e) ?then ?else),2339,11,0
+lambda2,24901,7850,GenericJoin,(+ ?a ?b),538,5199,0
+lambda2,24901,7850,GenericJoin,(+ ?a ?b),485,5199,1
+lambda2,24901,7850,EMatch,(+ ?a ?b),782,5199,0
+lambda2,24901,7850,GenericJoin,(+ (+ ?a ?b) ?c),20376,310029,0
+lambda2,24901,7850,GenericJoin,(+ (+ ?a ?b) ?c),20525,310029,1
+lambda2,24901,7850,EMatch,(+ (+ ?a ?b) ?c),17385,310029,0
+lambda2,24901,7850,GenericJoin,(= ?a ?b),33,76,0
+lambda2,24901,7850,GenericJoin,(= ?a ?b),29,76,1
+lambda2,24901,7850,EMatch,(= ?a ?b),26,76,0
+lambda2,24901,7850,GenericJoin,(fix ?v ?e),14,1,0
+lambda2,24901,7850,GenericJoin,(fix ?v ?e),15,1,1
+lambda2,24901,7850,EMatch,(fix ?v ?e),4,1,0
+lambda2,24901,7850,GenericJoin,(app (lam ?v ?body) ?e),216,890,0
+lambda2,24901,7850,GenericJoin,(app (lam ?v ?body) ?e),136,890,1
+lambda2,24901,7850,EMatch,(app (lam ?v ?body) ?e),216,890,0
+lambda2,24901,7850,GenericJoin,(let ?v ?e (app ?a ?b)),2499,17467,0
+lambda2,24901,7850,GenericJoin,(let ?v ?e (app ?a ?b)),1788,17467,1
+lambda2,24901,7850,EMatch,(let ?v ?e (app ?a ?b)),4009,17467,0
+lambda2,24901,7850,GenericJoin,(let ?v ?e (+ ?a ?b)),7635,68881,0
+lambda2,24901,7850,GenericJoin,(let ?v ?e (+ ?a ?b)),7080,68881,1
+lambda2,24901,7850,EMatch,(let ?v ?e (+ ?a ?b)),9551,68881,0
+lambda2,24901,7850,GenericJoin,(let ?v ?e (= ?a ?b)),187,1112,0
+lambda2,24901,7850,GenericJoin,(let ?v ?e (= ?a ?b)),187,1112,1
+lambda2,24901,7850,EMatch,(let ?v ?e (= ?a ?b)),1992,1112,0
+lambda2,24901,7850,GenericJoin,(let ?v ?e ?c),1729,12547,0
+lambda2,24901,7850,GenericJoin,(let ?v ?e ?c),1540,12547,1
+lambda2,24901,7850,EMatch,(let ?v ?e ?c),2914,12547,0
+lambda2,24901,7850,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),12610,117403,0
+lambda2,24901,7850,GenericJoin,(let ?v ?e (if ?cond ?then ?else)),12760,117403,1
+lambda2,24901,7850,EMatch,(let ?v ?e (if ?cond ?then ?else)),16277,117403,0
+lambda2,24901,7850,GenericJoin,(let ?v1 ?e (var ?v1)),878,20,0
+lambda2,24901,7850,GenericJoin,(let ?v1 ?e (var ?v1)),32,20,1
+lambda2,24901,7850,EMatch,(let ?v1 ?e (var ?v1)),1910,20,0
+lambda2,24901,7850,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),495,3857,0
+lambda2,24901,7850,GenericJoin,(let ?v1 ?e (lam ?v1 ?body)),463,3857,1
+lambda2,24901,7850,EMatch,(let ?v1 ?e (lam ?v1 ?body)),2215,3857,0
