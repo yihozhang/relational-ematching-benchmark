@@ -4,8 +4,8 @@ use std::thread;
 use std::time::*;
 use std::*;
 
-mod math;
 mod lambda;
+mod math;
 
 #[derive(Clone, Debug)]
 pub struct Bench<L: Language, A: Analysis<L> + 'static> {
@@ -124,34 +124,26 @@ struct Opt {
     strategy: Option<String>,
 }
 
-fn math(
-    sizes: &Vec<usize>,
-    strategies: &Vec<Strategy>,
-    wtr: &mut csv::Writer<std::fs::File>,
-) {
+fn math(sizes: &Vec<usize>, strategies: &Vec<Strategy>, wtr: &mut csv::Writer<std::fs::File>) {
     run_bench(math::math_bench(), sizes, strategies, wtr)
 }
 
-fn lambda1(
-    sizes: &Vec<usize>,
-    strategies: &Vec<Strategy>,
-    wtr: &mut csv::Writer<std::fs::File>,
-) {
+fn lambda1(sizes: &Vec<usize>, strategies: &Vec<Strategy>, wtr: &mut csv::Writer<std::fs::File>) {
     run_bench(lambda::lambda_bench1(), sizes, strategies, wtr)
 }
 
-fn lambda2(
-    sizes: &Vec<usize>,
-    strategies: &Vec<Strategy>,
-    wtr: &mut csv::Writer<std::fs::File>,
-) {
+fn lambda2(sizes: &Vec<usize>, strategies: &Vec<Strategy>, wtr: &mut csv::Writer<std::fs::File>) {
     run_bench(lambda::lambda_bench2(), sizes, strategies, wtr)
 }
 
 fn main() {
     let opt = Opt::from_args();
-    let benchs = opt.benchmarks.unwrap_or(vec!["math".into(), "lambda1".into(), "lambda2".into()]);
-    let sizes = opt.sizes.unwrap_or(vec![100, 1000, 10000, 100000, 200000, 300000]);
+    let benchs = opt
+        .benchmarks
+        .unwrap_or(vec!["math".into(), "lambda1".into(), "lambda2".into()]);
+    let sizes = opt
+        .sizes
+        .unwrap_or(vec![100, 1000, 10000, 100000, 200000, 300000]);
     let filename = opt.filename.unwrap_or("out/benchmark.csv".into());
     let strategies = opt.strategy.unwrap_or("all".into());
     let strategies = match strategies.as_str() {
