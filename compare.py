@@ -2,7 +2,7 @@
 
 import argparse
 import csv
-from statistics import median, harmonic_mean
+from statistics import median, harmonic_mean, geometric_mean
 
 parser = argparse.ArgumentParser(description='Process e-matching benchmarking data')
 parser.add_argument('file', type=argparse.FileType('r'))
@@ -27,9 +27,11 @@ for row in list(reader):
     if time == 0:
         time = 1
 
-    a[int(row['repeat_time'])] = time
+    row['time'] = time
 
-print('index,  bench,       size,  gj,  em,  total,  hmean,   best,   medn,  worst')
+    a[int(row['repeat_time'])] = row
+
+print('index,  bench,       size,  gj,  em,  total,  hmean,  gmean,   best,   medn,  worst')
 
 for bench, sizes in benches.items():
     biggest_size = max(sizes.keys())
@@ -45,8 +47,16 @@ for bench, sizes in benches.items():
             gj_times = []
 
             for pat, algos in pats.items():
-                em = int(algos['EMatch'][0])
-                gj = int(algos['GenericJoin'][exclude_gj_index])
+                em_row = algos['EMatch'][0]
+                gj_row = algos['GenericJoin'][exclude_gj_index]
+
+                if em_row['result_size'] != gj_row['result_size'] and em_row['time'] != TIMEOUT:
+                    print('MISMATCH!')
+                    print(em_row)
+                    print(gj_row)
+
+                em = em_row['time']
+                gj = gj_row['time']
                 if gj < em:
                     gj_faster += 1
                 else:
@@ -59,5 +69,6 @@ for bench, sizes in benches.items():
             total = sum(gj_times) / sum(em_times)
             fracs = [gj / em for gj, em in zip(gj_times, em_times)]
             hmean = harmonic_mean(fracs)
+            gmean = geometric_mean(fracs)
             print(f'{exclude_gj_index}, {bench:>10}, {size:>10}, {gj_faster:>3}, {em_faster:>3},  ' +
-                  f'{total:.3f},  {hmean:.3f},  {min(fracs):.3f},  {median(fracs):.3f},  {max(fracs):.3f}')
+                  f'{total:.3f},  {hmean:.3f},  {gmean:.3f},  {min(fracs):.3f},  {median(fracs):.3f},  {max(fracs):.3f}')

@@ -1,7 +1,7 @@
-use egg::{define_language, Id, Symbol, rewrite as rw};
 use crate::*;
-use std::collections::*;
+use egg::{define_language, rewrite as rw, Id, Symbol};
 use std::cmp::*;
+use std::collections::*;
 
 define_language! {
     pub enum Lambda {
@@ -174,7 +174,6 @@ impl Applier<Lambda, LambdaAnalysis> for CaptureAvoid {
     }
 }
 
-
 pub fn lambda_bench_meta(name: String, expr: String) -> Bench<Lambda, LambdaAnalysis> {
     let start_expr = expr.parse().unwrap();
     let rules = rules();
@@ -199,7 +198,7 @@ pub fn lambda_bench_meta(name: String, expr: String) -> Bench<Lambda, LambdaAnal
     .map(|r| r.parse().unwrap())
     .collect();
     Bench {
-        name: name,
+        name,
         start_expr,
         rules,
         bench_pats,
@@ -207,7 +206,9 @@ pub fn lambda_bench_meta(name: String, expr: String) -> Bench<Lambda, LambdaAnal
 }
 
 pub fn lambda_bench1() -> Bench<Lambda, LambdaAnalysis> {
-    lambda_bench_meta("lambda1".into(), "(let compose (lam f (lam g (lam x (app (var f)
+    lambda_bench_meta(
+        "lambda1".into(),
+        "(let compose (lam f (lam g (lam x (app (var f)
         (app (var g) (var x))))))
     (let repeat (fix repeat (lam fun (lam n
     (if (= (var n) 0)
@@ -219,11 +220,15 @@ pub fn lambda_bench1() -> Bench<Lambda, LambdaAnalysis> {
     (let add1 (lam y (+ (var y) 1))
     (app (app (var repeat)
     (var add1))
-    2))))".into())
+    2))))"
+            .into(),
+    )
 }
 
 pub fn lambda_bench2() -> Bench<Lambda, LambdaAnalysis> {
-    lambda_bench_meta("lambda2".into(), "(let fib (fix fib (lam n
+    lambda_bench_meta(
+        "lambda2".into(),
+        "(let fib (fix fib (lam n
         (if (= (var n) 0)
             0
         (if (= (var n) 1)
@@ -232,5 +237,7 @@ pub fn lambda_bench2() -> Bench<Lambda, LambdaAnalysis> {
                 (+ (var n) -1))
             (app (var fib)
                 (+ (var n) -2)))))))
-        (app (var fib) 4))".into())
+        (app (var fib) 4))"
+            .into(),
+    )
 }

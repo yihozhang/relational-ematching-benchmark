@@ -14,3 +14,7 @@ serde = { version = "1", features = ["derive"] }
 
 [dependencies.egg]
 path = "../egg"
+
+[profile.release]
+lto = "fat"
+codegen-units = 1

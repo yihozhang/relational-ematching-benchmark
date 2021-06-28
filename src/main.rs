@@ -1,4 +1,5 @@
 use egg::*;
+use std::fmt::Display;
 use std::sync::mpsc;
 use std::thread;
 use std::time::*;
@@ -31,12 +32,12 @@ pub struct BenchRecord {
 
 pub fn run_bench<L, A>(
     bench: Bench<L, A>,
-    sizes: &Vec<usize>,
-    strategies: &Vec<Strategy>,
+    sizes: &[usize],
+    strategies: &[Strategy],
     wtr: &mut csv::Writer<std::fs::File>,
 ) where
     A: Analysis<L> + Default + Clone + Send + Sync,
-    L: Language + Sync + Send,
+    L: Language + Sync + Send + Display,
     <A as egg::Analysis<L>>::Data: Send + Clone,
     <L as egg::Language>::Operator: Send + Sync,
 {
@@ -56,6 +57,8 @@ pub fn run_bench<L, A>(
         runner.print_report();
         egraph = runner.egraph;
         for pat in &pats {
+            let mut em_time = None;
+            let mut gj_time = None;
             for strategy in strategies {
                 egraph.strategy = strategy.clone();
                 let repeat = if strategy == &Strategy::GenericJoin {
@@ -89,6 +92,12 @@ pub fn run_bench<L, A>(
                             )
                         })
                         .unwrap_or(("TO".into(), 0));
+
+                    match strategy {
+                        Strategy::EMatch => em_time = Some(time.clone()),
+                        Strategy::GenericJoin => gj_time = Some(time.clone()),
+                    }
+
                     let record = BenchRecord {
                         benchmark: name,
                         node_size: egraph.total_number_of_nodes(),
@@ -104,6 +113,17 @@ pub fn run_bench<L, A>(
                     wtr.flush().unwrap();
                 }
             }
+
+            if let (Some(gj), Some(em)) = (gj_time, em_time) {
+                if let (Ok(gj), Ok(em)) = (gj.parse::<f64>(), em.parse::<f64>()) {
+                    let ratio = gj / em;
+                    if ratio > 1.0 {
+                        println!("!!!!!!! BAD ratio: {}\n\n", ratio);
+                    } else {
+                        println!("        OK  ratio: {}", ratio);
+                    }
+                }
+            }
         }
         if let Some(StopReason::Saturated) = runner.stop_reason {
             break;
@@ -114,52 +134,56 @@ pub fn run_bench<L, A>(
 use structopt::StructOpt;
 #[derive(Debug, StructOpt)]
 struct Opt {
-    #[structopt(short, long)]
-    benchmarks: Option<Vec<String>>,
-    #[structopt(short, long)]
-    sizes: Option<Vec<usize>>,
-    #[structopt(short, long)]
-    filename: Option<String>,
-    #[structopt(long)]
-    strategy: Option<String>,
+    #[structopt(
+        short,
+        long,
+        value_delimiter = ",",
+        default_value = "math,lambda1,lambda2"
+    )]
+    benchmarks: Vec<String>,
+    #[structopt(
+        short,
+        long,
+        value_delimiter = ",",
+        default_value = "100,1000,10000,100000,200000,300000"
+    )]
+    sizes: Vec<usize>,
+    #[structopt(short, long, default_value = "out/benchmark.csv")]
+    filename: String,
+    #[structopt(long, default_value = "all")]
+    strategy: String,
+    // #[structopt(long, default_value="5")]
+    // timeout: u32,
 }
 
-fn math(sizes: &Vec<usize>, strategies: &Vec<Strategy>, wtr: &mut csv::Writer<std::fs::File>) {
+fn math(sizes: &[usize], strategies: &[Strategy], wtr: &mut csv::Writer<std::fs::File>) {
     run_bench(math::math_bench(), sizes, strategies, wtr)
 }
 
-fn lambda1(sizes: &Vec<usize>, strategies: &Vec<Strategy>, wtr: &mut csv::Writer<std::fs::File>) {
+fn lambda1(sizes: &[usize], strategies: &[Strategy], wtr: &mut csv::Writer<std::fs::File>) {
     run_bench(lambda::lambda_bench1(), sizes, strategies, wtr)
 }
 
-fn lambda2(sizes: &Vec<usize>, strategies: &Vec<Strategy>, wtr: &mut csv::Writer<std::fs::File>) {
+fn lambda2(sizes: &[usize], strategies: &[Strategy], wtr: &mut csv::Writer<std::fs::File>) {
     run_bench(lambda::lambda_bench2(), sizes, strategies, wtr)
 }
 
 fn main() {
     let opt = Opt::from_args();
-    let benchs = opt
-        .benchmarks
-        .unwrap_or(vec!["math".into(), "lambda1".into(), "lambda2".into()]);
-    let sizes = opt
-        .sizes
-        .unwrap_or(vec![100, 1000, 10000, 100000, 200000, 300000]);
-    let filename = opt.filename.unwrap_or("out/benchmark.csv".into());
-    let strategies = opt.strategy.unwrap_or("all".into());
-    let strategies = match strategies.as_str() {
+    let strategies = match opt.strategy.as_str() {
         "all" => vec![Strategy::GenericJoin, Strategy::EMatch],
         "gj" => vec![Strategy::GenericJoin],
         "em" => vec![Strategy::EMatch],
         _ => panic!("strategy should be one of all, gj, or em"),
     };
-    let out = std::fs::File::create(&filename).unwrap();
+    let out = std::fs::File::create(&opt.filename).unwrap();
     let mut wtr = csv::Writer::from_writer(out);
     let mut bench_collection: collections::HashMap<String, fn(_, _, &mut _)> = Default::default();
     bench_collection.insert("math".into(), math);
     bench_collection.insert("lambda1".into(), lambda1);
     bench_collection.insert("lambda2".into(), lambda2);
-    for bench in benchs {
+    for bench in opt.benchmarks {
         let bench_fn = &bench_collection[&bench];
-        bench_fn(&sizes, &strategies, &mut wtr);
+        bench_fn(&opt.sizes, &strategies, &mut wtr);
     }
 }
