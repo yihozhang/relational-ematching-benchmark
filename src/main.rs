@@ -1,5 +1,7 @@
 use egg::*;
 use std::fmt::Display;
+use std::fs::File;
+use std::io::{BufRead, BufReader};
 use std::sync::mpsc;
 use std::thread;
 use std::time::*;
@@ -11,9 +13,27 @@ mod math;
 #[derive(Clone, Debug)]
 pub struct Bench<L: Language, A: Analysis<L> + 'static> {
     name: String,
-    start_expr: RecExpr<L>,
+    start_exprs: Vec<&'static str>,
     rules: Vec<Rewrite<L, A>>,
     bench_pats: Vec<Pattern<L>>,
+}
+
+fn parse_patterns<L: FromOp>(bench_name: &str) -> Vec<Pattern<L>> {
+    let file = File::open("patterns.csv").unwrap();
+    let reader = BufReader::new(file);
+    let mut pats = vec![];
+    for line in reader.lines().skip(1) {
+        let line = line.unwrap();
+        let line = line.trim();
+        if !(line.is_empty() || line.starts_with('#')) {
+            let fields: Vec<_> = line.split(",").map(|s| s.trim()).collect();
+            if fields[0] == bench_name {
+                let pat_string = fields.last().unwrap();
+                pats.push(pat_string.parse().unwrap())
+            }
+        }
+    }
+    pats
 }
 
 use serde::Serialize;
@@ -31,25 +51,27 @@ pub struct BenchRecord {
 }
 
 pub fn run_bench<L, A>(
+    opt: &Opt,
     bench: Bench<L, A>,
-    sizes: &[usize],
     strategies: &[Strategy],
     wtr: &mut csv::Writer<std::fs::File>,
 ) where
     A: Analysis<L> + Default + Clone + Send + Sync,
-    L: Language + Sync + Send + Display,
+    L: Language + FromOp + Sync + Send + Display,
     <A as egg::Analysis<L>>::Data: Send + Clone,
     <L as egg::Language>::Operator: Send + Sync,
 {
     let rules = bench.rules;
-    let expr = bench.start_expr;
     let pats = bench.bench_pats;
     let mut egraph: EGraph<L, A> = Default::default();
-    for node_limit in sizes {
+    for node_limit in &opt.sizes {
         egraph.strategy = Strategy::GenericJoin;
-        let runner: Runner<L, A> = egg::Runner::default()
-            .with_egraph(egraph)
-            .with_expr(&expr)
+        let mut runner: Runner<L, A> = egg::Runner::default().with_egraph(egraph);
+        for expr in &bench.start_exprs {
+            runner = runner.with_expr(&expr.parse().unwrap());
+        }
+
+        let runner = runner
             .with_node_limit(*node_limit)
             .with_iter_limit(1000)
             .with_time_limit(std::time::Duration::from_secs(4000))
@@ -76,7 +98,8 @@ pub fn run_bench<L, A>(
                         let egraph = egraph.clone();
                         thread::spawn(move || {
                             let time = std::time::Instant::now();
-                            let res = pat.search_with_limit(&egraph, 10_000_000);
+                            // let res = pat.search_with_limit(&egraph, 10_000_000);
+                            let res = pat.search(&egraph);
                             // let res = pat.search_with_limit(&egraph, usize::MAX);
                             sender
                                 .send((time.elapsed().as_micros(), res))
@@ -84,7 +107,7 @@ pub fn run_bench<L, A>(
                         });
                     }
                     let (time, result_size) = receiver
-                        .recv_timeout(Duration::from_secs(5))
+                        .recv_timeout(Duration::from_secs_f64(opt.timeout))
                         .map(|(time, res)| {
                             (
                                 time.to_string(),
@@ -133,42 +156,36 @@ pub fn run_bench<L, A>(
 
 use structopt::StructOpt;
 #[derive(Debug, StructOpt)]
-struct Opt {
-    #[structopt(
-        short,
-        long,
-        value_delimiter = ",",
-        default_value = "math,lambda1,lambda2"
-    )]
+pub struct Opt {
+    #[structopt(short, long, value_delimiter = ",", default_value = "math,lambda")]
     benchmarks: Vec<String>,
     #[structopt(
         short,
         long,
         value_delimiter = ",",
-        default_value = "100,1000,10000,100000,200000,300000"
+        default_value = "10000,100000,200000,300000"
     )]
     sizes: Vec<usize>,
     #[structopt(short, long, default_value = "out/benchmark.csv")]
     filename: String,
     #[structopt(long, default_value = "all")]
     strategy: String,
-    // #[structopt(long, default_value="5")]
-    // timeout: u32,
+    #[structopt(long, default_value = "1")]
+    samples: usize,
+    #[structopt(long, default_value = "60")]
+    timeout: f64,
 }
 
-fn math(sizes: &[usize], strategies: &[Strategy], wtr: &mut csv::Writer<std::fs::File>) {
-    run_bench(math::math_bench(), sizes, strategies, wtr)
+fn math(opt: &Opt, strategies: &[Strategy], wtr: &mut csv::Writer<std::fs::File>) {
+    run_bench(opt, math::math_bench(), strategies, wtr)
 }
 
-fn lambda1(sizes: &[usize], strategies: &[Strategy], wtr: &mut csv::Writer<std::fs::File>) {
-    run_bench(lambda::lambda_bench1(), sizes, strategies, wtr)
-}
-
-fn lambda2(sizes: &[usize], strategies: &[Strategy], wtr: &mut csv::Writer<std::fs::File>) {
-    run_bench(lambda::lambda_bench2(), sizes, strategies, wtr)
+fn lambda(opt: &Opt, strategies: &[Strategy], wtr: &mut csv::Writer<std::fs::File>) {
+    run_bench(opt, lambda::lambda_bench(), strategies, wtr)
 }
 
 fn main() {
+    let _ = env_logger::init();
     let opt = Opt::from_args();
     let strategies = match opt.strategy.as_str() {
         "all" => vec![Strategy::GenericJoin, Strategy::EMatch],
@@ -180,10 +197,11 @@ fn main() {
     let mut wtr = csv::Writer::from_writer(out);
     let mut bench_collection: collections::HashMap<String, fn(_, _, &mut _)> = Default::default();
     bench_collection.insert("math".into(), math);
-    bench_collection.insert("lambda1".into(), lambda1);
-    bench_collection.insert("lambda2".into(), lambda2);
-    for bench in opt.benchmarks {
-        let bench_fn = &bench_collection[&bench];
-        bench_fn(&opt.sizes, &strategies, &mut wtr);
+    bench_collection.insert("lambda".into(), lambda);
+    for _ in 0..opt.samples {
+        for bench in &opt.benchmarks {
+            let bench_fn = &bench_collection[&bench.clone()];
+            bench_fn(&opt, &strategies, &mut wtr);
+        }
     }
 }

@@ -11,10 +11,11 @@ ordered-float = "1"
 structopt = { version = "0.3", default-features = false }
 csv = "1.1"
 serde = { version = "1", features = ["derive"] }
+env_logger = "0.6"
 
 [dependencies.egg]
 path = "../egg"
 
 [profile.release]
 lto = "fat"
-codegen-units = 1
+# codegen-units = 1

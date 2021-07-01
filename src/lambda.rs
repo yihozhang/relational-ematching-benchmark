@@ -1,7 +1,46 @@
 use crate::*;
-use egg::{define_language, rewrite as rw, Id, Symbol};
+use egg::{define_language, rewrite as rw, Id};
 use std::cmp::*;
 use std::collections::*;
+
+pub fn lambda_bench() -> Bench<Lambda, LambdaAnalysis> {
+    Bench {
+        name: "lambda".into(),
+        rules: rules(),
+        bench_pats: parse_patterns("lambda"),
+        start_exprs: vec![
+            "(let zeroone (lam x
+                (if (= (var x) 0)
+                    0
+                    1))
+                (+ (app (var zeroone) 0)
+                (app (var zeroone) 10)))",
+            "(let compose (lam f (lam g (lam x (app (var f)
+                                            (app (var g) (var x))))))
+            (let repeat (fix repeat (lam fun (lam n
+                (if (= (var n) 0)
+                    (lam i (var i))
+                    (app (app (var compose) (var fun))
+                        (app (app (var repeat)
+                                (var fun))
+                            (+ (var n) -1)))))))
+            (let add1 (lam y (+ (var y) 1))
+            (app (app (var repeat)
+                    (var add1))
+                2))))",
+            "(let fib (fix fib (lam n
+                (if (= (var n) 0)
+                    0
+                (if (= (var n) 1)
+                    1
+                (+ (app (var fib)
+                        (+ (var n) -1))
+                    (app (var fib)
+                        (+ (var n) -2)))))))
+                (app (var fib) 4))",
+        ],
+    }
+}
 
 define_language! {
     pub enum Lambda {
@@ -20,7 +59,7 @@ define_language! {
 
         "if" = If([Id; 3]),
 
-        Symbol(Symbol),
+        Symbol(egg::Symbol),
     }
 }
 
@@ -172,72 +211,4 @@ impl Applier<Lambda, LambdaAnalysis> for CaptureAvoid {
             self.if_not_free.apply_one(egraph, eclass, &subst)
         }
     }
-}
-
-pub fn lambda_bench_meta(name: String, expr: String) -> Bench<Lambda, LambdaAnalysis> {
-    let start_expr = expr.parse().unwrap();
-    let rules = rules();
-    let bench_pats = vec![
-        "(if true ?then ?else)",
-        "(if false ?then ?else)",
-        "(if (= (var ?x) ?e) ?then ?else)",
-        "(+ ?a ?b)",
-        "(+ (+ ?a ?b) ?c)",
-        "(= ?a ?b)",
-        "(fix ?v ?e)",
-        "(app (lam ?v ?body) ?e)",
-        "(let ?v ?e (app ?a ?b))",
-        "(let ?v ?e (+ ?a ?b))",
-        "(let ?v ?e (= ?a ?b))",
-        "(let ?v ?e ?c)",
-        "(let ?v ?e (if ?cond ?then ?else))",
-        "(let ?v1 ?e (var ?v1))",
-        "(let ?v1 ?e (lam ?v1 ?body))",
-    ]
-    .iter()
-    .map(|r| r.parse().unwrap())
-    .collect();
-    Bench {
-        name,
-        start_expr,
-        rules,
-        bench_pats,
-    }
-}
-
-pub fn lambda_bench1() -> Bench<Lambda, LambdaAnalysis> {
-    lambda_bench_meta(
-        "lambda1".into(),
-        "(let compose (lam f (lam g (lam x (app (var f)
-        (app (var g) (var x))))))
-    (let repeat (fix repeat (lam fun (lam n
-    (if (= (var n) 0)
-    (lam i (var i))
-    (app (app (var compose) (var fun))
-    (app (app (var repeat)
-    (var fun))
-    (+ (var n) -1)))))))
-    (let add1 (lam y (+ (var y) 1))
-    (app (app (var repeat)
-    (var add1))
-    2))))"
-            .into(),
-    )
-}
-
-pub fn lambda_bench2() -> Bench<Lambda, LambdaAnalysis> {
-    lambda_bench_meta(
-        "lambda2".into(),
-        "(let fib (fix fib (lam n
-        (if (= (var n) 0)
-            0
-        (if (= (var n) 1)
-            1
-        (+ (app (var fib)
-                (+ (var n) -1))
-            (app (var fib)
-                (+ (var n) -2)))))))
-        (app (var fib) 4))"
-            .into(),
-    )
 }
