@@ -128,6 +128,7 @@ Y_TICKS = [1/100, 1/30, 1/10, 1/3, 1, 3, 10, 30, 100, 300, 1000]
 
 def plot_speedup():
     fig, axes = plt.subplots(len(benches), 1, figsize=(16, 10))
+    made_legend = False
     if not isinstance(axes, np.ndarray):
         axes = [axes]
     for ax, (bench, sizes) in zip(axes, sorted(benches.items())):
@@ -155,15 +156,18 @@ def plot_speedup():
             y1 = np.log10(em / gj1)
             y1 = np.maximum(y1, y0) # should be as least as fast as run0
 
-            # plot y1 first, since it's bigger
-            rects1 = ax.bar(x, y1, width, color='blue', label='gj w/o idx')
-            rects0 = ax.bar(x, y0, width, color='orange', label='gj w idx')
+            rects0 = ax.bar(x, y0, width, color='orange', label='em / gj')
+            bottom = np.maximum(0, y0)
+            rects1 = ax.bar(x, y1-bottom, width, color='blue', label='em / (gj - idx)', bottom=bottom)
 
 
             for xp,p in zip(x, labels):
                 if pats[p]['EMatch'][0][0]['time'] == TIMEOUT:
                     ax.text(xp, -0.3, '*',  weight='extra bold', ha='center', color='red')
 
+            if not made_legend:
+                made_legend = True
+                ax.legend(loc='upper left')
 
         for (xp, label) in enumerate(labels):
             xp = xp - 0.3
@@ -173,6 +177,7 @@ def plot_speedup():
             ax.text(xp, -0.1, '{}µs, n={}'.format(t, size), ha='right', **kwargs)
             label = label.replace('?', '')
             ax.text(xp, 0.1, label, ha='left', **kwargs)
+
 
         x = np.arange(len(labels))
         ax.set_title(bench)
@@ -186,7 +191,7 @@ def plot_time_saving():
     fig, axes = plt.subplots(len(benches), 1)
     if not isinstance(axes, np.ndarray):
         axes = [axes]
-    for ax, (bench, sizes) in zip(axes, sorted(benches.items())):
+    for ax_i, (ax, (bench, sizes)) in enumerate(zip(axes, sorted(benches.items()))):
         mid = (len(sizes) - 1) / 2
         assert 0 <= mid < len(sizes)
 
@@ -222,10 +227,8 @@ def plot_time_saving():
             ax.bar_label(rects1, [str(pats[p]['GenericJoin'][0][0]['result_size']) for p in labels])
             # ax.bar_label(rects0, [fmt_x(l) for l in em / gj0])
 
-
         # for (label, xp) in np.arange(len(labels)):
         #     ax.text(xp, 0, label, ha='right')
-
 
         ax.set_yscale('symlog')
         x = np.arange(len(labels))
