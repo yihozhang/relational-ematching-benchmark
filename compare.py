@@ -44,7 +44,7 @@ for row in list(reader):
 def get_time(row):
     return row['time']
 
-print('index,  bench,       size,  gj,  em,  total,  hmean,  gmean,   best,   medn,  worst')
+print('index,  bench,       size,  gj,  em, TO, total,  hmean,    gmean,     best,     medn,    worst')
 
 for bench, sizes in benches.items():
     biggest_size = max(sizes.keys())
@@ -84,12 +84,13 @@ for bench, sizes in benches.items():
             if len(em_times) == 0:
                 continue
 
+            em_timeout = em_times.count(TIMEOUT)
             total = sum(gj_times) / sum(em_times)
-            fracs = [gj / em for gj, em in zip(gj_times, em_times)]
+            fracs = [em / gj for gj, em in zip(gj_times, em_times)]
             hmean = harmonic_mean(fracs)
             gmean = geometric_mean(fracs)
-            print(f'{exclude_gj_index}, {bench:>10}, {size:>10}, {gj_faster:>3}, {em_faster:>3},  ' +
-                f'{total:.3f},  {hmean:.3f},  {gmean:.3f},  {min(fracs):.3f},  {median(fracs):.3f},  {max(fracs):.3f}')
+            print(f'{exclude_gj_index}, {bench:>10}, {size:>10}, {gj_faster:>3}, {em_faster:>3},  {em_timeout}, ' +
+                f'{total:.3f},  {hmean:.1e},  {gmean:.1e},  {max(fracs):.1e},  {median(fracs):.1e},  {min(fracs):.1e}')
 
 
 print(benches.keys())
@@ -108,14 +109,23 @@ def speedup(baseline, comp):
         for x in baseline / comp
     ])
 
+def fmt_time(us):
+    assert us >= 0
+    if us >= 1e6:
+        return '{:.0f}s'.format(us / 1e6)
+    if us >= 1e3:
+        return '{:.0f}ms'.format(us / 1e3)
+    return '{:.0f}µs'.format(us)
+
 def fmt_x(ratio):
     assert ratio > 0
-    if ratio >= 10:
-        return '{:.0f}×'.format(ratio)
-    elif ratio >= 1:
-        return '{:.0f}×'.format(ratio)
-    else:
-        return '-1/{:.0f}×'.format(1/ratio)
+    return '{:.1e}'.format(ratio)
+    # if ratio >= 10:
+    #     return '{:.0f}×'.format(ratio)
+    # elif ratio >= 1:
+    #     return '{:.0f}×'.format(ratio)
+    # else:
+        # return '1/{:.0f}×'.format(1/ratio)
 
 def pat_rank(pat):
     n_joins = pat.count("(") - 1
@@ -124,7 +134,9 @@ def pat_rank(pat):
     n_var_constraints = sum(n-1 for n in vs.values())
     return (n_joins, n_var_constraints, n_vars)
 
-Y_TICKS = [1/100, 1/30, 1/10, 1/3, 1, 3, 10, 30, 100, 300, 1000]
+# Y_TICKS = [1/100, 1/30, 1/10, 1/3, 1, 3, 10, 30, 100, 300, 1e3, 1e4, 1e5, 1e6]
+Y_LABELS = '0.01 0.03 0.1 0.3 1 3 10 30 100 300 1e3 1e4 1e5 1e6'.split()
+Y_TICKS  = [float(s) for s in Y_LABELS]
 
 def plot_speedup():
     fig, axes = plt.subplots(len(benches), 1, figsize=(16, 10))
@@ -134,6 +146,8 @@ def plot_speedup():
     for ax, (bench, sizes) in zip(axes, sorted(benches.items())):
         mid = (len(sizes) - 1) / 2
         assert 0 <= mid < len(sizes)
+
+        y_ticks = Y_TICKS if bench == 'math' else Y_TICKS[:11]
 
         for i, (size, pats) in enumerate(sorted(sizes.items())):
 
@@ -147,7 +161,7 @@ def plot_speedup():
             gj1 = np.array([nz(mintime(pats[p]['GenericJoin'][1])) for p in labels])
             em  = np.array([nz(mintime(pats[p]['EMatch'][0])) for p in labels])
 
-            for n in np.log10(Y_TICKS):
+            for n in np.log10(y_ticks):
                 alpha = 1 if n == 0 else 0.1
                 ax.axhline(n, alpha=alpha, zorder=-1, color='gray', linewidth=0.5)
 
@@ -174,7 +188,7 @@ def plot_speedup():
             kwargs = dict(rotation=90, rotation_mode='anchor', fontsize=7)
             size = pats[label]['GenericJoin'][0][0]['result_size']
             t = mintime(pats[label]['GenericJoin'][0])
-            ax.text(xp, -0.1, '{}µs, n={}'.format(t, size), ha='right', **kwargs)
+            ax.text(xp, -0.1, '{}, n={}'.format(fmt_time(t), size), ha='right', **kwargs)
             label = label.replace('?', '')
             ax.text(xp, 0.1, label, ha='left', **kwargs)
 
@@ -183,65 +197,12 @@ def plot_speedup():
         ax.set_title(bench)
         ax.set_xticks([])
         ax.set_xticklabels([])
-        ax.set_yticks(np.log10(Y_TICKS))
-        ax.set_yticklabels([fmt_x(t) for t in Y_TICKS])
-
-
-def plot_time_saving():
-    fig, axes = plt.subplots(len(benches), 1)
-    if not isinstance(axes, np.ndarray):
-        axes = [axes]
-    for ax_i, (ax, (bench, sizes)) in enumerate(zip(axes, sorted(benches.items()))):
-        mid = (len(sizes) - 1) / 2
-        assert 0 <= mid < len(sizes)
-
-        ax.axhline(0, zorder=-1, color='black', linewidth=0.3)
-
-        for i, (size, pats) in enumerate(sorted(sizes.items())):
-
-            def pat_rank(pat):
-                return (pat.count("("), pat.count("?"), len(pat))
-            labels = list(sorted(pats.keys(), key=pat_rank))
-
-            print(i > mid)
-            x = np.arange(len(labels)) + width * (i - mid) * 1.1
-
-            gj0 = np.array([nz(mintime(pats[p]['GenericJoin'][0])) for p in labels])
-            gj1 = np.array([nz(mintime(pats[p]['GenericJoin'][1])) for p in labels])
-            em  = np.array([nz(mintime(pats[p]['EMatch'][0])) for p in labels])
-
-            # # all times
-            # rects = ax.bar(x, em, width/3, color='green', label='em')
-            # rects0 = ax.bar(x + width/3, gj0, width/3, color='orange', label='gj w idx')
-            # rects1 = ax.bar(x + 2*width/3, gj1, width/3, color='blue', label='gj w/o idx')
-
-            # savings
-            rects1 = ax.bar(x, em - gj1, width, color='blue', label='gj w/o idx')
-            # rects0 = ax.bar(x, em - gj0, width, color='orange', label='gj w idx')
-
-            # rects0 = ax.bar(x + width/2, np.log10(em / gj0), width, label='gj w/ idx')
-            # rects1 = ax.bar(x - width/2, em / gj1, width, label='gj w/o idx')
-            # rects0 = ax.bar(x + width/2, em / gj0, width, label='gj w/ idx')
-
-            # ax.bar_label(rects1, [fmt_x(l) for l in em / gj1])
-            ax.bar_label(rects1, [str(pats[p]['GenericJoin'][0][0]['result_size']) for p in labels])
-            # ax.bar_label(rects0, [fmt_x(l) for l in em / gj0])
-
-        # for (label, xp) in np.arange(len(labels)):
-        #     ax.text(xp, 0, label, ha='right')
-
-        ax.set_yscale('symlog')
-        x = np.arange(len(labels))
-        ax.set_title(bench)
-        ax.set_xticks(x)
-        ax.set_xticklabels(labels, rotation=-10, ha='center')
-        # ax.legend()
-
+        ax.set_yticks(np.log10(y_ticks))
+        ax.set_yticklabels(Y_LABELS[:len(y_ticks)])
 
 plot_speedup()
-# plot_time_saving()
 plt.tight_layout()
-plt.savefig('plot.pdf')
-plt.savefig('plot.png', dpi=300)
+# plt.savefig('plot.pdf')
+# plt.savefig('plot.png', dpi=300)
 
 plt.show()
