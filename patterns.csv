@@ -1,0 +1,63 @@
+bench,  const, type, pattern
+math, 0, 0, (+ ?a (+ ?b ?c))
+math, 0, 0, (+ (+ ?a ?b) ?c)
+math, 0, 0, (* ?a (* ?b ?c))
+math, 0, 0, (* (* ?a ?b) ?c)
+math, 0, 0, (+ ?a (* -1 ?b))
+math, 0, 0, (* ?a (pow ?b -1))
+math, 0, 0, (* ?a (+ ?b ?c))
+math, 0, 0, (pow ?a (+ ?b ?c))
+
+math, 0, 0, (+ (* ?a ?b) (* ?a ?c))
+math, 0, 0, (* (pow ?a ?b) (pow ?a ?c))
+math, 0, 0, (* ?x (/ 1 ?x))
+
+math, 0, 0, (d ?x (+ ?a ?b))
+math, 0, 0, (+ (d ?x ?a) (d ?x ?b))
+math, 0, 0, (d ?x (* ?a ?b))
+math, 0, 0, (+ (* ?a (d ?x ?b)) (* ?b (d ?x ?a)))
+math, 0, 0, (d ?x (sin ?x))
+math, 0, 0, (d ?x (cos ?x))
+
+math, 0, 0, (* -1 (sin ?x))
+math, 0, 0, (* -1 (cos ?x))
+
+math, 0, 0, (i (cos ?x) ?x)
+math, 0, 0, (i (sin ?x) ?x)
+
+math, 0, 0, (d ?x (ln ?x))
+
+math, 0, 0, (d ?x (pow ?f ?g))
+math, 0, 0, (* (pow ?f ?g) (+ (* (d ?x ?f) (/ ?g ?f)) (* (d ?x ?g) (ln ?f))))
+math, 0, 0, (i (pow ?x ?c) ?x)
+math, 0, 0, (/ (pow ?x (+ ?c 1)) (+ ?c 1))
+
+math, 0, 0, (i (+ ?f ?g) ?x)
+math, 0, 0, (i (- ?f ?g) ?x)
+
+math, 0, 0, (+ (i ?f ?x) (i ?g ?x))
+math, 0, 0, (- (i ?f ?x) (i ?g ?x))
+
+math, 0, 0, (i (* ?a ?b) ?x)
+math, 0, 0, (- (* ?a (i ?b ?x)) (i (* (d ?x ?a) (i ?b ?x)) ?x))
+
+lambda, 0, 0, (if (= (var ?x) ?e) ?then ?else)
+lambda, 0, 0, (+ (+ ?a ?b) ?c)
+lambda, 0, 0, (let ?v (fix ?v ?e) ?e)
+lambda, 0, 0, (app (lam ?v ?body) ?e)
+lambda, 0, 0, (let ?v ?e (app ?a ?b))
+lambda, 0, 0, (app (let ?v ?e ?a) (let ?v ?e ?b))
+lambda, 0, 0, (let ?v ?e (+   ?a ?b))
+lambda, 0, 0, (+   (let ?v ?e ?a) (let ?v ?e ?b))
+lambda, 0, 0, (let ?v ?e (=   ?a ?b))
+lambda, 0, 0, (=   (let ?v ?e ?a) (let ?v ?e ?b))
+
+lambda, 0, 0, (let ?v ?e (if ?cond ?then ?else))
+lambda, 0, 0, (if (let ?v ?e ?cond) (let ?v ?e ?then) (let ?v ?e ?else))
+lambda, 0, 0, (let ?v1 ?e (var ?v1))
+lambda, 0, 0, (let ?v1 ?e (var ?v2))
+lambda, 0, 0, (let ?v1 ?e (lam ?v1 ?body))
+lambda, 0, 0, (let ?v1 ?e (lam ?v2 ?body))
+
+lambda, 0, 0, (lam ?v2 (let ?v1 ?e ?body))
+lambda, 0, 0, (lam ?fresh (let ?v1 ?e (let ?v2 (var ?fresh) ?body)))
