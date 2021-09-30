@@ -14,8 +14,10 @@ serde = { version = "1", features = ["derive"] }
 env_logger = "0.6"
 
 [dependencies.egg]
-path = "../egg"
+# path = "../egg"
+git = "https://github.com/egraphs-good/egg"
+rev = "665926938d11f72f16e41dba8d53c307965d838c"
 
 [profile.release]
 lto = "fat"
-# codegen-units = 1
+codegen-units = 1
