@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
 import re
-import numpy as np
-import matplotlib.pyplot as plt
 import argparse
 import csv
 from collections import Counter
@@ -11,7 +9,13 @@ from statistics import median, harmonic_mean, geometric_mean
 parser = argparse.ArgumentParser(description='Process e-matching benchmarking data')
 parser.add_argument('file', type=argparse.FileType('r'))
 parser.add_argument('--all-egraphs', action='store_true', help='Show data all e-graphs, not only biggest')
+parser.add_argument('--plot', action='store_true', help='Make the plot')
 args = parser.parse_args()
+
+if args.plot:
+    # only import these things if we need to
+    import numpy as np
+    import matplotlib.pyplot as plt
 
 TIMEOUT = 10000 * 1e6
 
@@ -249,9 +253,9 @@ def plot_speedup():
         ax.set_xticks(np.log10(ticks))
         ax.set_xticklabels([l + '×' for l in LABELS[:len(ticks)]], rotation=-90)
 
-plot_speedup()
-plt.tight_layout()
-# plt.savefig('plot.pdf')
-# plt.savefig('plot.png', dpi=300)
-
-plt.show()
+if args.plot:
+    plot_speedup()
+    plt.tight_layout()
+    plt.savefig('plot.pdf')
+    plt.savefig('plot.png', dpi=300)
+    plt.show()
