@@ -30,6 +30,7 @@ for row in list(reader):
 
     if row['time'] == 'TO':
         time = TIMEOUT
+        print("TIMEOUT!!!!!")
         exit(1)
     else:
         time = int(row['time'])
@@ -47,12 +48,21 @@ def get_time(row):
 
 def fmt_x(ratio):
     assert ratio > 0
-    m,e = '{:.1e}'.format(ratio).split('e')
-    e = int(e)
-    if e == 0:
-        return '{:<6}'.format(m)
+    if ratio > 1e4:
+        m,e = '{:.1e}'.format(ratio).split('e')
+        e = int(e)
+        return '{:>5}e{:d}'.format(m, e)
+    elif ratio < 1:
+        s = '{:>7.2f}'.format(ratio)
+        return s.replace('0.', ' .', 1)
     else:
-        return '{}e{:+d}'.format(m, e)
+        return '{:>7.2f}'.format(ratio)
+    # return '{:>6.2g}'.format(ratio)
+    # m,e = '{:.1e}'.format(ratio).split('e')
+    # e = int(e)
+    # if e == 0:
+    #     return '{:<6}'.format(m)
+    # else:
     # if ratio >= 10:
     #     return '{:.0f}×'.format(ratio)
     # elif ratio >= 1:
@@ -110,8 +120,10 @@ for bench, sizes in benches.items():
                 continue
 
             em_timeout = em_times.count(TIMEOUT)
-            total = sum(em_times) / sum(gj_times)
-            fracs = [em / gj for gj, em in zip(gj_times, em_times)]
+            # total = sum(em_times) / sum(gj_times)
+            total = sum(em_times_no_timeout) / sum(gj_times_no_timeout)
+            # fracs = [em / gj for gj, em in zip(gj_times, em_times)]
+            fracs = [em / gj for gj, em in zip(gj_times_no_timeout, em_times_no_timeout)]
             hmean = harmonic_mean(fracs)
             gmean = geometric_mean(fracs)
             print(f'{exclude_gj_index}, {bench:>10}, {size:>10}, {gj_faster:>3}, {em_faster:>3},  {em_timeout}, ' +
@@ -149,7 +161,7 @@ def pat_rank(pat):
     n_var_constraints = sum(n-1 for n in vs.values())
     return (n_joins, n_var_constraints, n_vars)
 
-LABELS = '0.01 0.03 0.1 0.3 1 3 10 30 100 300 1e3 1e4 1e5 1e6'.split()
+LABELS = '0.01 0.03 0.1 0.3 1 3 10 30 100 300 1e3 1e4 1e5 1e6 1e7'.split()
 # LABELS = '1e-2 3e-2 1e-1 3e-1 1 3 1e1 3e1 1e2 3e2 1e3 1e4 1e5 1e6'.split()
 TICKS  = [float(s) for s in LABELS]
 
@@ -163,19 +175,17 @@ def plot_speedup():
         mid = (len(sizes) - 1) / 2
         assert 0 <= mid < len(sizes)
 
-        biggest_size = max(sizes.keys())
         ticks = TICKS if bench == 'math' else TICKS[:11]
 
         for i, size in enumerate(sorted(sizes.keys())):
             pats = sizes[size]
 
-            labels = list(reversed(sorted(pats.keys(), key=pat_rank)))
-            # def rank(pat):
-            #     return int(sizes[biggest_size][pat]['GenericJoin'][0][0]['result_size'])
-            # labels = list(reversed(sorted(pats.keys(), key=rank)))
-            print(labels)
+            # labels = list(reversed(sorted(pats.keys(), key=pat_rank)))
+            def size_rank(pat):
+                return int(sizes[biggest_size][pat]['GenericJoin'][0][0]['result_size'])
+            labels = list(sorted(pats.keys(), key=size_rank))
+            # print(labels)
 
-            print(i > mid)
             x = np.arange(len(labels)) - width * (i - mid) * 1.2
 
             gj0 = np.array([nz(mintime(pats[p]['GenericJoin'][0])) for p in labels])
@@ -211,13 +221,25 @@ def plot_speedup():
         for (p, label) in enumerate(labels):
             p = p + 0.35
             # kwargs = dict(rotation=90, rotation_mode='anchor', fontsize=7)
-            kwargs = dict(fontsize=9)
-            pats = sizes[biggest_size]
+            kwargs = dict(fontsize=9, va='bottom')
             size = pats[label]['GenericJoin'][0][0]['result_size']
-            t = mintime(pats[label]['GenericJoin'][1])
-            ax.text(-0.1, p, '{}, n={}'.format(fmt_time(t), size), ha='right', **kwargs)
+            gjt0 = mintime(pats[label]['GenericJoin'][0])
+            gjt1 = mintime(pats[label]['GenericJoin'][1])
+            idxt = max(0, gjt0 - gjt1)
+            emt = mintime(pats[label]['EMatch'][0])
+            # ax.text(-0.1, p, '{}, n={}'.format(fmt_time(t), size), ha='right', **kwargs)
+            offset = -0.1
+            ax.text(-0.1, p + offset, '{} results'.format(size), ha='right', **kwargs)
+            # ax.text(-0.1, p,
+            # ax.text(-0.1, p + offset,
+            #         '{} / ({} – {})\nn={}'.format(fmt_time(emt), fmt_time(gjt0), fmt_time(idxt), size),
+            #         ha='right', **kwargs)
+            # ax.text(-0.1, p,
+            #         '{} / ({} – {})'.format(fmt_time(emt), fmt_time(gjt0), fmt_time(idxt)),
+            #         ha='right', **kwargs)
+            # ax.text(-0.1, p - 0.4, 'n={}'.format(size), ha='right', **kwargs)
             label = label.replace('?', '')
-            ax.text(0.1, p, label, ha='left', **kwargs)
+            ax.text(0.1, p + offset, label, ha='left', **kwargs)
 
 
         x = np.arange(len(labels))
@@ -229,7 +251,7 @@ def plot_speedup():
 
 plot_speedup()
 plt.tight_layout()
-plt.savefig('plot.pdf')
-plt.savefig('plot.png', dpi=300)
+# plt.savefig('plot.pdf')
+# plt.savefig('plot.png', dpi=300)
 
 plt.show()
