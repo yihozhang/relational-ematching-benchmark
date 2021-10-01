@@ -18,7 +18,7 @@ case "$kind" in
         $run --samples=1 --timeout=5 --sizes=10000,100000
         ;;
     medium)  
-        $run --samples=1 --timeout=10
+        $run --samples=1 --timeout=100
         ;;
     full)  
         $run --samples=10 --timeout=1000

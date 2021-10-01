@@ -23,9 +23,10 @@ You can run three kinds of benchmarks.
   it only benches the smaller e-graphs and uses a 5s timeout.
   It takes around 2 minutes to run.
 
-- `./bench.sh medium` runs the full suite, but with a 10s timeout and fewer samples.
+- `./bench.sh medium` runs the full suite, but with a 100s timeout and fewer samples.
 
 - `./bench.sh full` runs the full suite with no timeout and the full 10 samples.
+  The minimum time is taken for each benchmark across the 10 runs.
 
 ## Results Description
 
