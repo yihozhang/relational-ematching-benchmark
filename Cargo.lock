@@ -94,7 +94,7 @@ dependencies = [
 [[package]]
 name = "egg"
 version = "0.6.1-dev"
-source = "git+https://github.com/egraphs-good/egg?rev=665926938d11f72f16e41dba8d53c307965d838c#665926938d11f72f16e41dba8d53c307965d838c"
+source = "git+https://github.com/egraphs-good/egg?rev=2b89b7594c2e163d9eab9cb687be1edbd7e09563#2b89b7594c2e163d9eab9cb687be1edbd7e09563"
 dependencies = [
  "fxhash",
  "hashbrown 0.11.2",
@@ -293,7 +293,7 @@ dependencies = [
 [[package]]
 name = "qry"
 version = "0.1.0"
-source = "git+https://github.com/mwillsey/qry?rev=1bd8dee7cf3b0388ceb23031b03db4362f06f850#1bd8dee7cf3b0388ceb23031b03db4362f06f850"
+source = "git+https://github.com/mwillsey/qry?rev=11c92ff715d0593c0ca86c2b533b9ef8a249bd2c#11c92ff715d0593c0ca86c2b533b9ef8a249bd2c"
 dependencies = [
  "log",
  "rustc-hash",

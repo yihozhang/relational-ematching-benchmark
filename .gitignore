@@ -1,1 +1,7 @@
 /target
+/out
+
+flamegraph*.svg
+
+*.pdf
+*.csv

@@ -9,15 +9,16 @@ from statistics import median, harmonic_mean, geometric_mean
 parser = argparse.ArgumentParser(description='Process e-matching benchmarking data')
 parser.add_argument('file', type=argparse.FileType('r'))
 parser.add_argument('--all-egraphs', action='store_true', help='Show data all e-graphs, not only biggest')
-parser.add_argument('--plot', action='store_true', help='Make the plot')
+parser.add_argument('--plot', help='Write the plot to this file')
+parser.add_argument('--show-plot', action='store_true', help='Make and show the plot')
+parser.add_argument('--timeout', type=float, 
+                    help='How long to assume timeouts took in seconds (default is the reported time)')
 args = parser.parse_args()
 
-if args.plot:
+if args.plot or args.show_plot:
     # only import these things if we need to
     import numpy as np
     import matplotlib.pyplot as plt
-
-TIMEOUT = 10000 * 1e6
 
 patterns = {}
 for row in csv.DictReader(open('patterns.csv'), skipinitialspace=True):
@@ -32,17 +33,21 @@ for row in list(reader):
     p = n.setdefault(row['pattern'], {})
     a = p.setdefault(row['algo'], {})
 
-    if row['time'] == 'TO':
-        time = TIMEOUT
-        print("TIMEOUT!!!!!")
-        exit(1)
+    assert row['algo'] in ['GenericJoin', 'EMatch']
+
+    t = int(row['time'])
+    row['timeout'] = False
+    if t < 0:
+        row['timeout'] = True
+        if args.timeout is None:
+            row['time'] = abs(t)
+        else:
+            row['time'] = args.timeout * 1e6 # microseconds
+    elif t == 0:
+        row['time'] = 1
     else:
-        time = int(row['time'])
-
-    if time == 0:
-        time = 1
-
-    row['time'] = time
+        row['time'] = t
+    assert row['time'] > 0
 
     rpt = int(row['repeat_time'])
     a.setdefault(rpt, []).append(row)
@@ -75,9 +80,9 @@ def fmt_x(ratio):
         # return '1/{:.0f}×'.format(1/ratio)
 
 
-print('index,  bench,       size,  gj,  em, TO, total,  hmean,    gmean,     best,     medn,    worst')
+print('index,  bench,       size,  gj,  em, TO,   total,    hmean,    gmean,     best,     medn,    worst')
 
-for bench, sizes in benches.items():
+for bench, sizes in sorted(benches.items()):
     biggest_size = max(sizes.keys())
     for size, pats in sorted(sizes.items()):
         if not (args.all_egraphs or size == biggest_size):
@@ -99,10 +104,15 @@ for bench, sizes in benches.items():
                 em_row = min(algos['EMatch'][0], key=get_time)
                 gj_row = min(algos['GenericJoin'][exclude_gj_index], key=get_time)
 
-                if em_row['result_size'] != gj_row['result_size'] and em_row['time'] != TIMEOUT:
+                if em_row['result_size'] != gj_row['result_size'] and not em_row['timeout']:
                     print('MISMATCH!')
                     print(em_row)
                     print(gj_row)
+
+                if gj_row['timeout']:
+                    print(gj_row)
+                    print(em_row)
+                    print("WARNING: GJ TIMED OUT, SCRIPT OUTPUT MIGHT BE A LITTLE OFF")
 
                 em = em_row['time']
                 gj = gj_row['time']
@@ -114,7 +124,7 @@ for bench, sizes in benches.items():
                 em_times.append(em)
                 gj_times.append(gj)
 
-                if em < TIMEOUT:
+                if not em_row['timeout']:
                     em_times_no_timeout.append(em)
                     gj_times_no_timeout.append(gj)
 
@@ -123,11 +133,11 @@ for bench, sizes in benches.items():
             if len(em_times) == 0:
                 continue
 
-            em_timeout = em_times.count(TIMEOUT)
-            # total = sum(em_times) / sum(gj_times)
-            total = sum(em_times_no_timeout) / sum(gj_times_no_timeout)
-            # fracs = [em / gj for gj, em in zip(gj_times, em_times)]
-            fracs = [em / gj for gj, em in zip(gj_times_no_timeout, em_times_no_timeout)]
+            em_timeout = len(em_times) - len(em_times_no_timeout)
+            total = sum(em_times) / sum(gj_times)
+            fracs = [em / gj for gj, em in zip(gj_times, em_times)]
+            # total = sum(em_times_no_timeout) / sum(gj_times_no_timeout)
+            # fracs = [em / gj for gj, em in zip(gj_times_no_timeout, em_times_no_timeout)]
             hmean = harmonic_mean(fracs)
             gmean = geometric_mean(fracs)
             print(f'{exclude_gj_index}, {bench:>10}, {size:>10}, {gj_faster:>3}, {em_faster:>3},  {em_timeout}, ' +
@@ -211,10 +221,10 @@ def plot_speedup():
 
 
             # for xp,p in zip(x, labels):
-            #     if mintime(pats[p]['EMatch'][0]) == TIMEOUT:
+            #     if mintime(pats[p]['EMatch'][0]) >= TIMEOUT:
             #         ax.text(-0.0, xp, '*',  weight='extra bold', ha='center', color='red')
             for r,p in zip(rects1, labels):
-                if mintime(pats[p]['EMatch'][0]) == TIMEOUT:
+                if any(row['timeout'] for row in pats[p]['EMatch'][0]):
                     ax.text(r.get_x() + r.get_width() + 0.1, r.get_y() - r.get_height()/2, '<',
                             ha='center', weight='extra bold', color='red')
 
@@ -253,9 +263,13 @@ def plot_speedup():
         ax.set_xticks(np.log10(ticks))
         ax.set_xticklabels([l + '×' for l in LABELS[:len(ticks)]], rotation=-90)
 
-if args.plot:
+if args.plot or args.show_plot:
     plot_speedup()
     plt.tight_layout()
-    plt.savefig('plot.pdf')
-    plt.savefig('plot.png', dpi=300)
+
+if args.plot:
+    plt.savefig(args.plot)
+    # plt.savefig('plot.png', dpi=300)
+
+if args.show_plot:
     plt.show()

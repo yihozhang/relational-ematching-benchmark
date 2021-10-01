@@ -16,7 +16,7 @@ env_logger = "0.6"
 [dependencies.egg]
 # path = "../egg"
 git = "https://github.com/egraphs-good/egg"
-rev = "665926938d11f72f16e41dba8d53c307965d838c"
+rev = "2b89b7594c2e163d9eab9cb687be1edbd7e09563"
 
 [profile.release]
 lto = "fat"

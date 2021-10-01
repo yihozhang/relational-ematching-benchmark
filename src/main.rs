@@ -106,15 +106,17 @@ pub fn run_bench<L, A>(
                                 .unwrap_or_default()
                         });
                     }
+                    let timeout = Duration::from_secs_f64(opt.timeout);
                     let (time, result_size) = receiver
-                        .recv_timeout(Duration::from_secs_f64(opt.timeout))
+                        .recv_timeout(timeout)
                         .map(|(time, res)| {
                             (
                                 time.to_string(),
                                 res.iter().map(|m| m.substs.len()).sum::<usize>(),
                             )
                         })
-                        .unwrap_or(("TO".into(), 0));
+                        // timeouts are printed as negative
+                        .unwrap_or((format!("-{}", timeout.as_micros()), 0));
 
                     match strategy {
                         Strategy::EMatch => em_time = Some(time.clone()),
@@ -131,19 +133,23 @@ pub fn run_bench<L, A>(
                         result_size,
                         repeat_time,
                     };
-                    eprintln!("{:?}", record);
+                    if opt.verbose {
+                        eprintln!("{:?}", record);
+                    }
                     wtr.serialize(record).unwrap();
                     wtr.flush().unwrap();
                 }
             }
 
-            if let (Some(gj), Some(em)) = (gj_time, em_time) {
-                if let (Ok(gj), Ok(em)) = (gj.parse::<f64>(), em.parse::<f64>()) {
-                    let ratio = gj / em;
-                    if ratio > 1.0 {
-                        println!("!!!!!!! BAD ratio: {}\n\n", ratio);
-                    } else {
-                        println!("        OK  ratio: {}", ratio);
+            if opt.verbose {
+                if let (Some(gj), Some(em)) = (gj_time, em_time) {
+                    if let (Ok(gj), Ok(em)) = (gj.parse::<f64>(), em.parse::<f64>()) {
+                        let ratio = gj.abs() / em.abs();
+                        if ratio > 1.0 {
+                            println!("!!!!!!! BAD ratio: {}\n\n", ratio);
+                        } else {
+                            println!("        OK  ratio: {}", ratio);
+                        }
                     }
                 }
             }
@@ -174,6 +180,8 @@ pub struct Opt {
     samples: usize,
     #[structopt(long, default_value = "60")]
     timeout: f64,
+    #[structopt(long)]
+    verbose: bool,
 }
 
 fn math(opt: &Opt, strategies: &[Strategy], wtr: &mut csv::Writer<std::fs::File>) {
@@ -185,6 +193,7 @@ fn lambda(opt: &Opt, strategies: &[Strategy], wtr: &mut csv::Writer<std::fs::Fil
 }
 
 fn main() {
+    let start = Instant::now();
     let _ = env_logger::init();
     let opt = Opt::from_args();
     let strategies = match opt.strategy.as_str() {
@@ -204,4 +213,6 @@ fn main() {
             bench_fn(&opt, &strategies, &mut wtr);
         }
     }
+
+    println!("Benchmark took {:?}", start.elapsed())
 }
