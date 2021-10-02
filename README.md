@@ -34,14 +34,20 @@ You can run three kinds of benchmarks.
   It takes around 2 minutes to run.
 
 - `make medium` runs the full suite, but with a 100s timeout and fewer samples.
+  This takes about 15-20 minutes to run.
 
-- `make full` runs the full suite with no timeout and the full 10 samples.
-  The minimum time is taken for each benchmark across the 10 runs.
+- `make full` runs the full suite with no timeout and 5 samples.
+  The minimum time is taken for each benchmark across the 5 runs.
+  This takes about 12 hours to run.
 
 Additionally, `make submitted` will use the saved `out/benchmark.csv` 
 to recreate the submitted results exactly.
 This only does the calculations and plotting, 
 `make full` will re-run the entire experiment.
+
+The first time you run `make`, 
+it will have to build the project, which will take a couple minutes.
+This will be cached for future invocations of `make`.
 
 ## Results Description
 

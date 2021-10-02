@@ -11,7 +11,7 @@ out/benchmark-short.csv: $(egg-bench)
 out/benchmark-medium.csv: $(egg-bench)
 	$(run) --filename=$@ --samples=1 --timeout=100
 out/benchmark-full.csv: $(egg-bench)
-	$(run) --filename=$@ --samples=1 --timeout=1000
+	$(run) --filename=$@ --samples=5 --timeout=1000
 
 # These are PHONY because we want to always run them to show the tables
 .PHONY: short medium full submitted
