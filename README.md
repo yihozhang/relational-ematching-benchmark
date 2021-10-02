@@ -16,6 +16,10 @@ The first time you run `./docker.sh`, it may take a few minutes to build the ima
 The script will leave you with a `bash` prompt, 
 and you can run the benchmarking commands from there.
 
+The `./docker.sh` script will automatically use [`podman`](https://podman.io/)
+if available (likely the case if you are using Fedora), otherwise it will use `docker`.
+You may need to do `sudo ./docker.sh` if you are using `docker`.
+
 ## Benchmarking Description
 
 TODO 
