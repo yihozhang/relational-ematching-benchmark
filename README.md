@@ -1,6 +1,8 @@
 # Relational E-matching Artifact
 
-[arXiv](https://arxiv.org/abs/2108.02290)
+[Link to arXiv.](https://arxiv.org/abs/2108.02290)
+
+This artifact aims to reproduce Figure 9 and Table 1.
 
 ## Requirements
 
@@ -38,7 +40,7 @@ You can run three kinds of benchmarks.
 
 - `make full` runs the full suite with no timeout and 5 samples.
   The minimum time is taken for each benchmark across the 5 runs.
-  This takes about 12 hours to run.
+  This takes 2-4 hours to run.
 
 Additionally, `make submitted` will use the saved `out/benchmark.csv` 
 to recreate the submitted results exactly.
@@ -49,6 +51,19 @@ The first time you run `make`,
 it will have to build the project, which will take a couple minutes.
 This will be cached for future invocations of `make`.
 
+GNU `time` reports that the maximum resident memory used by the benchmark is
+just over 14GB, so your machine (or VM if running Docker on a Mac) should have
+16GB or more. 
+The `make short` variant will use less memory.
+
+Running the benchmark will place the plot in the `out/` directory.
+
 ## Results Description
 
-TODO 
+The `short` and `medium` variants will likely have non-zero numbers in the `TO`
+column of the table.
+This column is not in the paper because the `full` variant has no timeouts.
+This number shows how many e-matching pattern timed out in that row's configuration,
+our generic join implementation should never time out.
+If this number is non-zero, that row looks worse for GJ (our tool) that it should,
+because an EM benchmark stopped "early" due to time out.

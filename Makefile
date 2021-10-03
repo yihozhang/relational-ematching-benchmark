@@ -1,7 +1,7 @@
 
 src = $(wildward src/*) Cargo.*
 egg-bench = target/release/egg-bench
-run = cargo run --release -- --verbose
+run = time cargo run --release -- --verbose
 
 $(egg-bench): $(src)
 	cargo build --release
