@@ -208,7 +208,7 @@ impl Applier<Lambda, LambdaAnalysis> for CaptureAvoid {
             subst.insert(self.fresh, egraph.add(sym));
             self.if_free.apply_one(egraph, eclass, &subst)
         } else {
-            self.if_not_free.apply_one(egraph, eclass, &subst)
+            self.if_not_free.apply_one(egraph, eclass, subst)
         }
     }
 }

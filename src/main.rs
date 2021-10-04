@@ -26,7 +26,7 @@ fn parse_patterns<L: FromOp>(bench_name: &str) -> Vec<Pattern<L>> {
         let line = line.unwrap();
         let line = line.trim();
         if !(line.is_empty() || line.starts_with('#')) {
-            let fields: Vec<_> = line.split(",").map(|s| s.trim()).collect();
+            let fields: Vec<_> = line.split(',').map(|s| s.trim()).collect();
             if fields[0] == bench_name {
                 let pat_string = fields.last().unwrap();
                 pats.push(pat_string.parse().unwrap())
@@ -82,7 +82,7 @@ pub fn run_bench<L, A>(
             let mut em_time = None;
             let mut gj_time = None;
             for strategy in strategies {
-                egraph.strategy = strategy.clone();
+                egraph.strategy = *strategy;
                 let repeat = if strategy == &Strategy::GenericJoin {
                     2
                 } else {
