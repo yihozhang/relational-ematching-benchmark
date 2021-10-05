@@ -111,8 +111,9 @@ it will have to build the project, which will take a couple minutes.
 This will be cached for future invocations of `make`.
 
 GNU `time` reports that the maximum resident memory used by the benchmark is
-just over 14GB, so your machine (or VM if running Docker on a Mac) should have
-16GB or more. 
+just over 14GB, so your machine 
+(or VM if [running Docker on a Mac](https://docs.docker.com/desktop/mac/#resources)) 
+should have 16GB or more. 
 The `make short` variant will use less memory.
 
 Running the benchmark will place the plot in the `out/` directory.
