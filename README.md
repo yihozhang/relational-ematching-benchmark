@@ -125,3 +125,6 @@ column of the table.
 This column is not in the paper because the `full` variant has no timeouts.
 This number shows how many e-matching pattern timed out in that row's configuration,
 our generic join implementation should never time out.
+
+The generated plots may show very slightly different numbers of results than in the paper;
+this is expected since the e-graph generation is not totally deterministic.
