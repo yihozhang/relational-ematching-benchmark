@@ -101,7 +101,7 @@ You can run three kinds of benchmarks.
   The minimum time is taken for each benchmark across the 5 runs.
   This takes 2-4 hours to run.
 
-Additionally, `make submitted` will use the saved `out/benchmark.csv` 
+Additionally, `make submitted` will use the saved `out/benchmark-submitted.csv` 
 to recreate the submitted results exactly.
 This only does the calculations and plotting, 
 `make full` will re-run the entire experiment.

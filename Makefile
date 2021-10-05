@@ -16,7 +16,7 @@ out/benchmark-full.csv: $(egg-bench)
 # These are PHONY because we want to always run them to show the tables
 .PHONY: short medium full submitted
 
-submitted: out/benchmark.csv
+submitted: out/benchmark-submitted.csv
 	./compare.py $< --all-egraphs --plot=out/plot-submitted.pdf
 
 short: out/benchmark-short.csv
