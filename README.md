@@ -1,7 +1,7 @@
 # Relational E-matching Artifact
 
 This is the artifact for the
-[POPL 2021 paper](https://popl22.sigplan.org/details/POPL-2022-popl-research-papers/35/Relational-E-Matching)
+[POPL 2022 paper](https://popl22.sigplan.org/details/POPL-2022-popl-research-papers/35/Relational-E-Matching)
 "Relational E-matching".
 A copy can be found on 
 [arXiv](https://arxiv.org/abs/2108.02290).
