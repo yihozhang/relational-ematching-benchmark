@@ -64,6 +64,8 @@ The columns indicate the following:
 - em: how many pattern EM was faster on
 - TO: how many patterns EM timed out on (GJ should never timeout).
   *If this number is non-zero, that row looks worse for GJ (our tool) that it should, because an EM benchmark stopped "early" due to time out.*
+
+The remaining columns are all speedup ratios, where a number > 1 indicates that GJ is faster.
 - total: the ratio (total time spent in EM across all patterns) / (total time for GJ)
 - the remaining columns show various summary stats across the speed-up ratios for each pattern.
 
@@ -102,7 +104,7 @@ You can run three kinds of benchmarks.
   This takes 2-4 hours to run.
 
 Additionally, `make submitted` will use the saved `out/benchmark-submitted.csv` 
-to recreate the submitted results exactly.
+to recreate the submitted results.
 This only does the calculations and plotting, 
 `make full` will re-run the entire experiment.
 
