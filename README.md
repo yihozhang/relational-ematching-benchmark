@@ -14,6 +14,11 @@ with a traditional e-matching algorithm (referred to as EM).
 
 This artifact aims to reproduce Figure 9 and Table 1.
 
+This benchmark refers to
+ [this version of `egg`](https://github.com/egraphs-good/egg/tree/2b89b7594c2e163d9eab9cb687be1edbd7e09563)
+ which uses [this version of `qry`](https://github.com/mwillsey/qry/tree/11c92ff715d0593c0ca86c2b533b9ef8a249bd2c),
+ an implementation of generic join.
+
 ## Benchmark Description
 
 The empirical claims in this paper are based on a suite 
